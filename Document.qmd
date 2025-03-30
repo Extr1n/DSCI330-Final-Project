@@ -1,0 +1,34 @@
+---
+format: pdf
+---
+
+
+```{r}
+#| echo: false
+#| output: false
+
+library(readr)
+mental_health <- read_csv("data/MentalHealthSurvey.csv")
+
+mhdata <- mental_health
+
+spec(mental_health)
+
+print(mental_health)
+```
+
+# Plot funs
+
+```{r}
+#| echo: false
+
+plot(mental_health$academic_pressure, mental_health$anxiety, main = "Academic Pressure vs Anxiety", xlab = "Academic Pressure", ylab = "Anxiety")
+
+fit <- lm(mental_health$anxiety ~ mental_health$academic_pressure)
+abline(fit, col = "red")
+
+get_names = names(mhdata)[sapply(mhdata, is.factor)]
+df = mhdata[,get_names]
+
+print(paste(df))
+```
