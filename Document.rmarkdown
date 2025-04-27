@@ -1,0 +1,60 @@
+---
+format: pdf
+---
+
+```{r}
+#| echo: false
+#| output: false
+
+library(readr)
+mental_health <- read_csv("data/MentalHealthSurvey.csv")
+
+mhdata <- mental_health
+
+spec(mental_health)
+
+print(mental_health)
+```
+
+
+
+# Plot funs
+
+
+
+```{r}
+#| echo: false
+
+plot(mental_health$academic_pressure, mental_health$anxiety, main = "Academic Pressure vs Anxiety", xlab = "Academic Pressure", ylab = "Anxiety")
+
+fit <- lm(mental_health$anxiety ~ mental_health$academic_pressure)
+abline(fit, col = "red")
+
+get_names = names(mhdata)[sapply(mhdata, is.factor)]
+df = mhdata[,get_names]
+
+print(paste(df))
+```
+
+```{python}
+#| output: false
+
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_squared_error, mean_absolute_error 
+from sklearn import preprocessing 
+```
+
+```{python}
+# importing data 
+df = pd.read_csv("data/MentalHealthSurvey.csv")
+df.drop('No', inplace = True,axis=1) 
+
+print(df.head()) 
+print(df.columns)
+```
+

@@ -1,34 +1,22 @@
 ---
-format: pdf
+format:pdf
 ---
+# Impact of Academic Pressure, Financial Strain, and Social Relationships on Student Mental Health
+## Introduction
+Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.
 
+The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits
 
-```{r}
-#| echo: false
-#| output: false
+## Methodology
+The data used for this tool 
 
-library(readr)
-mental_health <- read_csv("data/MentalHealthSurvey.csv")
+## References
+McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.
 
-mhdata <- mental_health
+“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.
 
-spec(mental_health)
+Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol. 13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.
 
-print(mental_health)
-```
+“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.
 
-# Plot funs
-
-```{r}
-#| echo: false
-
-plot(mental_health$academic_pressure, mental_health$anxiety, main = "Academic Pressure vs Anxiety", xlab = "Academic Pressure", ylab = "Anxiety")
-
-fit <- lm(mental_health$anxiety ~ mental_health$academic_pressure)
-abline(fit, col = "red")
-
-get_names = names(mhdata)[sapply(mhdata, is.factor)]
-df = mhdata[,get_names]
-
-print(paste(df))
-```
+‌
