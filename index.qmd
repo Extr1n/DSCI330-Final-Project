@@ -1,6 +1,3 @@
----
-format: pdf 
----
 # Impact of External Pressures on Student Mental Health
 ## Introduction
 Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.
@@ -12,23 +9,37 @@ In my initial planing stages of this tool was to figure out a way to standardize
 ## Methodology
 The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:
 
+::: {.columns}
+::: {.column}
 - CGPA
 - Residential Status
 - Campus Discrimination
 - Sports Engagement
 - Average Sleep
+:::
+::: {.column}
 - Study Satisfaction
 - Academic Workload
 - Academic Pressure
 - Financial Concerns
 - Social Relationships
+:::
+
+:::
 
 And the dependent variables were:
 
+::: {.columns}
+::: {.column}
 - Depression
 - Anxiety
+:::
+::: {.column}
 - Isolation
 - Future Insecurity
+:::
+
+:::
 
 The tool uses a random forest model to evaluate the risk of mental health disorders. This model uses the same columns as the linear regression model. The tool uses the linear regression models to generate a risk score for each mental health concern. To further evaluate the risk of mental health disorders, the tool uses the random forest model to identify important variables in the survey. Additionally, by analyzing the weights of each variable in the regression models, exploratory can be done to understand how different external pressures affect different mental health disorders. Additionally, there was some exploratory data analysis done to better understand the survey data distribution and correlations between variables.
 
@@ -36,8 +47,8 @@ The tool uses a random forest model to evaluate the risk of mental health disord
 #### Data Collection
 The data used for this tool was collected from an online survey. The survey was taken from the website [https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey](https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey). This survey was a real suvey amongst students at PUCIT and asked participants about the following:
 
-
-
+::: {.columns}
+::: {.column}
 - Gender
 - Age
 - University
@@ -48,6 +59,8 @@ The data used for this tool was collected from an online survey. The survey was 
 - Residential Status
 - Campus Discrimination
 - Sports Engagement
+:::
+::: {.column}
 - Average Sleep
 - Study Satisfaction
 - Academic Workload
@@ -58,6 +71,10 @@ The data used for this tool was collected from an online survey. The survey was 
 - Anxiety
 - Isolation
 - Future Insecurity
+:::
+
+::: 
+
 
 While not all of the columns were used in the tool itself, some of the columns were used in some exploratory data analysis for the survey data.
 
