@@ -195,11 +195,20 @@ y_names = ["depression", "anxiety", "isolation", "future_insecurity"]
 # Results
 ## Tool
 
+TODO:
+
+- Add tool results
+- Add tool code
+- Add tool description
+- Add tool screenshots
 
 ## Exploratory Data Analysis
-
+For this section I mainly focused at heatmaps and box plots to analyze correlations between specific variables and mental health issues. If you want to look at all findings for yourself visit the [Exploratory Data Analysis](/Document.html) page.
 
 # Impacts
+
+
+# Problems
 
 
 # Improvements
