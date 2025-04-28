@@ -203,7 +203,7 @@ TODO:
 - Add tool screenshots
 
 ## Exploratory Data Analysis
-For this section I mainly focused at heatmaps and box plots to analyze correlations between specific variables and mental health issues. If you want to look at all findings for yourself visit the [Exploratory Data Analysis](/Document.html) page.
+For this section I mainly focused at heatmaps and box plots to analyze correlations between specific variables and mental health issues. If you want to look at all findings for yourself visit the [Exploratory Data Analysis](https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf) page.
 
 # Impacts
 
