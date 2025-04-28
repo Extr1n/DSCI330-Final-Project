@@ -6,6 +6,7 @@ format:
         respect-user-color-scheme: true
         code-fold: true
         code-summary: "Code"
+        toc: true
 ---
 
 
@@ -144,7 +145,7 @@ df =df.replace(to_replace="7-8 hrs", value=8)
 x = df.drop(['depression', 'anxiety', 'isolation', 'future_insecurity', 'gender', 'age', 'academic_year'], axis=1)
 ```
 
-### Linear Regression & Random Forest
+### Regression Models
 The regression tools used for this project were from the python library "sklearn" and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.
 
 ```{python}
