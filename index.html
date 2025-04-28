@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,22 +66,37 @@ ul.task-list li input[type="checkbox"] {
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-8a79a254b8e706d3c925cde0a310d4f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-0d69334f58f65720e5372d09bbfc8b52.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
 <body class="fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Impact of External Pressures on Student Mental Health</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
 
-<main class="content" id="quarto-document-content">
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="impact-of-external-pressures-on-student-mental-health" class="level1">
-<h1>Impact of External Pressures on Student Mental Health</h1>
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.</p>
@@ -131,11 +180,88 @@ ul.task-list li input[type="checkbox"] {
 <h4 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h4>
 <p>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values.</p>
 <p>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</p>
+<div id="c76e984a" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dfall.drop([<span class="st">'university'</span>, <span class="st">'degree_level'</span>, <span class="st">'degree_major'</span>, <span class="st">'stress_relief_activities'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Male"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Female"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1st year"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2nd year"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3rd year"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4th year"</span>, value<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"0.0-0.0"</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1.5-2.0"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2.0-2.5"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2.5-3.0"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3.0-3.5"</span>, value<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3.5-4.0"</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Off-Campus"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"On-Campus"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Yes"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"No"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"No Sports"</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1-3 times"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4-6 times"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"7+ times"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4-6 hrs"</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2-4 hrs"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"7-8 hrs"</span>, value<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df.drop([<span class="st">'depression'</span>, <span class="st">'anxiety'</span>, <span class="st">'isolation'</span>, <span class="st">'future_insecurity'</span>, <span class="st">'gender'</span>, <span class="st">'age'</span>, <span class="st">'academic_year'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 </section>
 <section id="linear-regression-random-forest" class="level3">
 <h3 class="anchored" data-anchor-id="linear-regression-random-forest">Linear Regression &amp; Random Forest</h3>
 <p>The regression tools used for this project were from the python library “sklearn” and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</p>
+<div id="41686691" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>anxiety <span class="op">=</span> df[<span class="st">'anxiety'</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>isolation <span class="op">=</span> df[<span class="st">'isolation'</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>insecurity <span class="op">=</span> df[<span class="st">'future_insecurity'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dx_train, dx_test, dy_train, dy_test <span class="op">=</span> train_test_split(x, depression, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ax_train, ax_test, ay_train, ay_test <span class="op">=</span> train_test_split(x, anxiety, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ix_train, ix_test, iy_train, iy_test <span class="op">=</span> train_test_split(x, isolation, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fx_train, fx_test, fy_train, fy_test <span class="op">=</span> train_test_split(x, insecurity, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>model_depression <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>rf_depression <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>model_depression.fit(dx_train, dy_train)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>rf_depression.fit(dx_train, dy_train)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>model_anxiety <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>rf_anxiety <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>model_anxiety.fit(ax_train, ay_train)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>rf_anxiety.fit(ax_train, ay_train)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>model_isolation <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>rf_isolation <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>model_isolation.fit(ix_train, iy_train)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>rf_isolation.fit(ix_train, iy_train)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>model_insecurity <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>rf_insecurity <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>model_insecurity.fit(fx_train, fy_train)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>rf_insecurity.fit(fx_train, fy_train)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [model_depression, model_anxiety, model_isolation, model_insecurity]</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [depression, anxiety, isolation, insecurity]</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>y_names <span class="op">=</span> [<span class="st">"depression"</span>, <span class="st">"anxiety"</span>, <span class="st">"isolation"</span>, <span class="st">"future_insecurity"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 </section>
 <section id="results" class="level2">
@@ -156,7 +282,6 @@ ul.task-list li input[type="checkbox"] {
 <p>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</p>
 <p>Barbayannis, Georgia, et al.&nbsp;“Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol.&nbsp;13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</p>
 <p>“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.</p>
-</section>
 </section>
 
 </main>

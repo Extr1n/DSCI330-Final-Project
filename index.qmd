@@ -1,3 +1,29 @@
+---
+title-block-banner: true
+format:
+    html:
+        theme: cerulean
+        respect-user-color-scheme: true
+        code-fold: true
+        code-summary: "Code"
+---
+
+
+```{python}
+#| output: false
+#| include: false 
+
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn import preprocessing 
+from sklearn.ensemble import RandomForestRegressor
+```
+
 # Impact of External Pressures on Student Mental Health
 ## Introduction
 Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.
@@ -83,8 +109,84 @@ The bulk of the data cleaning came from converting the data into a format that c
 
 Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.
 
+```{python}
+#| output: false
+
+dfall = pd.read_csv("data/MentalHealthSurvey.csv")
+
+df = dfall.drop(['university', 'degree_level', 'degree_major', 'stress_relief_activities'], axis=1)
+
+df =df.replace(to_replace="Male", value=1)
+df =df.replace(to_replace="Female", value=-1)
+df =df.replace(to_replace="1st year", value=1)
+df =df.replace(to_replace="2nd year", value=2)
+df =df.replace(to_replace="3rd year", value=3)
+df =df.replace(to_replace="4th year", value=4)
+df =df.replace(to_replace="0.0-0.0", value=0)
+df =df.replace(to_replace="1.5-2.0", value=1)
+df =df.replace(to_replace="2.0-2.5", value=2)
+df =df.replace(to_replace="2.5-3.0", value=3)
+df =df.replace(to_replace="3.0-3.5", value=4)
+df =df.replace(to_replace="3.5-4.0", value=5)
+df =df.replace(to_replace="Off-Campus", value=-1)
+df =df.replace(to_replace="On-Campus", value=1)
+df =df.replace(to_replace="Yes", value=1)
+df =df.replace(to_replace="No", value=-1)
+df =df.replace(to_replace="No Sports", value=0)
+df =df.replace(to_replace="1-3 times", value=1)
+df =df.replace(to_replace="4-6 times", value=2)
+df =df.replace(to_replace="7+ times", value=3)
+df =df.replace(to_replace="4-6 hrs", value=5)
+df =df.replace(to_replace="2-4 hrs", value=3)
+df =df.replace(to_replace="7-8 hrs", value=8)
+
+
+x = df.drop(['depression', 'anxiety', 'isolation', 'future_insecurity', 'gender', 'age', 'academic_year'], axis=1)
+```
+
 ### Linear Regression & Random Forest
 The regression tools used for this project were from the python library "sklearn" and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.
+
+```{python}
+#| output: false
+depression = df['depression']
+anxiety = df['anxiety']
+isolation = df['isolation']
+insecurity = df['future_insecurity']
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(x, depression, test_size=0.15, random_state=40)
+ax_train, ax_test, ay_train, ay_test = train_test_split(x, anxiety, test_size=0.15, random_state=40)
+ix_train, ix_test, iy_train, iy_test = train_test_split(x, isolation, test_size=0.15, random_state=40)
+fx_train, fx_test, fy_train, fy_test = train_test_split(x, insecurity, test_size=0.15, random_state=40)
+
+model_depression = LinearRegression()
+rf_depression = RandomForestRegressor(n_estimators=10, random_state=0, oob_score=True)
+
+model_depression.fit(dx_train, dy_train)
+rf_depression.fit(dx_train, dy_train)
+
+model_anxiety = LinearRegression()
+rf_anxiety = RandomForestRegressor(n_estimators=10, random_state=0, oob_score=True)
+
+model_anxiety.fit(ax_train, ay_train)
+rf_anxiety.fit(ax_train, ay_train)
+
+model_isolation = LinearRegression()
+rf_isolation = RandomForestRegressor(n_estimators=10, random_state=0, oob_score=True)
+
+model_isolation.fit(ix_train, iy_train)
+rf_isolation.fit(ix_train, iy_train)
+
+model_insecurity = LinearRegression()
+rf_insecurity = RandomForestRegressor(n_estimators=10, random_state=0, oob_score=True)
+
+model_insecurity.fit(fx_train, fy_train)
+rf_insecurity.fit(fx_train, fy_train)
+
+models = [model_depression, model_anxiety, model_isolation, model_insecurity]
+y = [depression, anxiety, isolation, insecurity]
+y_names = ["depression", "anxiety", "isolation", "future_insecurity"]
+```
 
 ## Results
 
