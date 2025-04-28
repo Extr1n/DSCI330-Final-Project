@@ -10,7 +10,7 @@ format:
         code-summary: "Code"
         toc: true
 website:
-  favicon: CWRU.jpg
+  favicon: images/CWRU.jpg
 ---
 
 
