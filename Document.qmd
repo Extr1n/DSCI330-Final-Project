@@ -1,14 +1,84 @@
 ---
-format:pdf
+format: pdf 
 ---
-# Impact of Academic Pressure, Financial Strain, and Social Relationships on Student Mental Health
+# Impact of External Pressures on Student Mental Health
 ## Introduction
 Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.
 
-The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits
+The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits and use this data to predict if students were at risk for mental health disorders. Specifically, I hoped to analyze how different external pressures affect different mental health disorders. For example, the survey asked about academic pressure, academic workload, financial strain, social relationships, etc, and I hoped to use this in order to not only predict risks of mental health disorders but also to identify correlations between certain pressures and mental health disorders.
+
+In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders.
 
 ## Methodology
-The data used for this tool 
+The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:
+
+- CGPA
+- Residential Status
+- Campus Discrimination
+- Sports Engagement
+- Average Sleep
+- Study Satisfaction
+- Academic Workload
+- Academic Pressure
+- Financial Concerns
+- Social Relationships
+
+And the dependent variables were:
+
+- Depression
+- Anxiety
+- Isolation
+- Future Insecurity
+
+The tool uses a random forest model to evaluate the risk of mental health disorders. This model uses the same columns as the linear regression model. The tool uses the linear regression models to generate a risk score for each mental health concern. To further evaluate the risk of mental health disorders, the tool uses the random forest model to identify important variables in the survey. Additionally, by analyzing the weights of each variable in the regression models, exploratory can be done to understand how different external pressures affect different mental health disorders. Additionally, there was some exploratory data analysis done to better understand the survey data distribution and correlations between variables.
+
+### Data
+#### Data Collection
+The data used for this tool was collected from an online survey. The survey was taken from the website [https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey](https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey). This survey was a real suvey amongst students at PUCIT and asked participants about the following:
+
+
+
+- Gender
+- Age
+- University
+- Degree Level
+- Degree Major
+- Academic Year
+- CGPA
+- Residential Status
+- Campus Discrimination
+- Sports Engagement
+- Average Sleep
+- Study Satisfaction
+- Academic Workload
+- Academic Pressure
+- Financial Concerns
+- Social Relationships
+- Depression
+- Anxiety
+- Isolation
+- Future Insecurity
+
+While not all of the columns were used in the tool itself, some of the columns were used in some exploratory data analysis for the survey data.
+
+#### Data Cleaning
+The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values. 
+
+Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.
+
+### Linear Regression & Random Forest
+The regression tools used for this project were from the python library "sklearn" and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.
+
+## Results
+
+
+## Impacts
+
+
+## Improvements
+
+
+## Conclusion
 
 ## References
 McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.
@@ -19,4 +89,3 @@ Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College
 
 “New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.
 
-‌
