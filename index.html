@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h3>
 <p>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values.</p>
 <p>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</p>
-<div id="5dacbd9a" class="cell" data-execution_count="2">
+<div id="b7f2b057" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
@@ -253,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="regression-models" class="level2">
 <h2 class="anchored" data-anchor-id="regression-models">Regression Models</h2>
 <p>The regression tools used for this project were from the python library “sklearn” and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</p>
-<div id="1cde9830" class="cell" data-execution_count="3">
+<div id="14d38a40" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
