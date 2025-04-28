@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aidan Bugayong">
 
-<title>index</title>
+<title>Impact of External Pressures on Student Mental Health</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,6 +84,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Aidan Bugayong </p>
+            </div>
+    </div>
       
     
       
@@ -98,7 +105,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a>
   <ul class="collapse">
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection">Data Collection</a></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
+  </ul></li>
   <li><a href="#regression-models" id="toc-regression-models" class="nav-link" data-scroll-target="#regression-models">Regression Models</a></li>
   </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
@@ -115,14 +126,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.</p>
 <p>The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits and use this data to predict if students were at risk for mental health disorders. Specifically, I hoped to analyze how different external pressures affect different mental health disorders. For example, the survey asked about academic pressure, academic workload, financial strain, social relationships, etc, and I hoped to use this in order to not only predict risks of mental health disorders but also to identify correlations between certain pressures and mental health disorders.</p>
 <p>In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders.</p>
 </section>
-<section id="methodology" class="level2">
-<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
+<section id="methodology" class="level1">
+<h1>Methodology</h1>
 <p>The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:</p>
 <div class="columns">
 <div class="column">
@@ -158,10 +169,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The tool uses a random forest model to evaluate the risk of mental health disorders. This model uses the same columns as the linear regression model. The tool uses the linear regression models to generate a risk score for each mental health concern. To further evaluate the risk of mental health disorders, the tool uses the random forest model to identify important variables in the survey. Additionally, by analyzing the weights of each variable in the regression models, exploratory can be done to understand how different external pressures affect different mental health disorders. Additionally, there was some exploratory data analysis done to better understand the survey data distribution and correlations between variables.</p>
-<section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data">Data</h3>
-<section id="data-collection" class="level4">
-<h4 class="anchored" data-anchor-id="data-collection">Data Collection</h4>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="data-collection" class="level3">
+<h3 class="anchored" data-anchor-id="data-collection">Data Collection</h3>
 <p>The data used for this tool was collected from an online survey. The survey was taken from the website <a href="https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey">https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</a>. This survey was a real suvey amongst students at PUCIT and asked participants about the following:</p>
 <div class="columns">
 <div class="column">
@@ -194,11 +205,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>While not all of the columns were used in the tool itself, some of the columns were used in some exploratory data analysis for the survey data.</p>
 </section>
-<section id="data-cleaning" class="level4">
-<h4 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h4>
+<section id="data-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h3>
 <p>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values.</p>
 <p>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</p>
-<div id="ba456260" class="cell" data-execution_count="2">
+<div id="193dab24" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
@@ -235,10 +246,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="regression-models" class="level3">
-<h3 class="anchored" data-anchor-id="regression-models">Regression Models</h3>
+<section id="regression-models" class="level2">
+<h2 class="anchored" data-anchor-id="regression-models">Regression Models</h2>
 <p>The regression tools used for this project were from the python library “sklearn” and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</p>
-<div id="746890bc" class="cell" data-execution_count="3">
+<div id="eb3fee18" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
@@ -282,20 +293,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="results" class="level1">
+<h1>Results</h1>
 </section>
-<section id="impacts" class="level2">
-<h2 class="anchored" data-anchor-id="impacts">Impacts</h2>
+<section id="impacts" class="level1">
+<h1>Impacts</h1>
 </section>
-<section id="improvements" class="level2">
-<h2 class="anchored" data-anchor-id="improvements">Improvements</h2>
+<section id="improvements" class="level1">
+<h1>Improvements</h1>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="references" class="level1">
+<h1>References</h1>
 <p>McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb.&nbsp;2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.</p>
 <p>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</p>
 <p>Barbayannis, Georgia, et al.&nbsp;“Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol.&nbsp;13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</p>
