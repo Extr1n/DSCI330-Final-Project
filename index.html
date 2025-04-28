@@ -112,7 +112,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#regression-models" id="toc-regression-models" class="nav-link" data-scroll-target="#regression-models">Regression Models</a></li>
   </ul></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#tool" id="toc-tool" class="nav-link" data-scroll-target="#tool">Tool</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
+  </ul></li>
   <li><a href="#impacts" id="toc-impacts" class="nav-link" data-scroll-target="#impacts">Impacts</a></li>
   <li><a href="#improvements" id="toc-improvements" class="nav-link" data-scroll-target="#improvements">Improvements</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -209,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h3>
 <p>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values.</p>
 <p>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</p>
-<div id="193dab24" class="cell" data-execution_count="2">
+<div id="332ab85d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
@@ -249,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="regression-models" class="level2">
 <h2 class="anchored" data-anchor-id="regression-models">Regression Models</h2>
 <p>The regression tools used for this project were from the python library “sklearn” and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</p>
-<div id="eb3fee18" class="cell" data-execution_count="3">
+<div id="7230cc0d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
@@ -295,6 +299,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
+<section id="tool" class="level2">
+<h2 class="anchored" data-anchor-id="tool">Tool</h2>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+</section>
 </section>
 <section id="impacts" class="level1">
 <h1>Impacts</h1>
@@ -311,6 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</p>
 <p>Barbayannis, Georgia, et al.&nbsp;“Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol.&nbsp;13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</p>
 <p>“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.</p>
+<p>Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</p>
 </section>
 
 </main>

@@ -9,6 +9,8 @@ format:
         code-fold: true
         code-summary: "Code"
         toc: true
+website:
+  favicon: CWRU.jpg
 ---
 
 
@@ -191,6 +193,10 @@ y_names = ["depression", "anxiety", "isolation", "future_insecurity"]
 ```
 
 # Results
+## Tool
+
+
+## Exploratory Data Analysis
 
 
 # Impacts
@@ -210,3 +216,4 @@ Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College
 
 “New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.
 
+Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey
