@@ -201,8 +201,6 @@ y_names = ["depression", "anxiety", "isolation", "future_insecurity"]
 For this section I will mainly focus on heatmaps and box plots to analyze correlations between specific variables and mental health issues. The dependent variable for these plots are the various mental health concerns measured in the survey (Depression, Anxiety, Isolation, Future Insecurity). Whereas there are a variety of independent variables that will be measured. Quick remind on how box plots work is that they plot the mean and their quartiles. The heatmaps display the mean of each coupled variable (example: average isolation score of women) and display the mean along a gradient. A darker color indicates a higher mean of mental score, whereas a lighter color indicates a lower score. 
 
 ```{python}
-#| column: screen-inset-shaded
-#| layout-nrow: 1
 
 def get_box_plot(i):
     sns.set_theme(style="darkgrid")
@@ -214,7 +212,7 @@ def get_box_plot(i):
 def get_heatmap(m):
   pivot = (dfall.groupby(m)[y_names].mean())
 
-  plt.figure(figsize=(12, 5))
+  plt.figure(figsize=(10, 4))
 
   sns.heatmap(pivot, annot=True, cmap="flare", fmt=".2f", cbar_kws={'label': 'Mean Value'})
   plt.title('Mental Health Factors by ' + m)
@@ -251,17 +249,98 @@ TODO:
 
 - Add tool results
 - Add tool screenshots
+- Export weights
 
 ### Exploratory Data Analysis
 
-Here we can analyze a set of selected plots and draw conclusions based on the suvery data.
+Here we can analyze a set of selected plots and draw conclusions based on the suvery data. Note that the code for these graphs are more clearly labeled in the [plots](#plots) section. Each plot was simply created by calling the `get_box_plot` or `get_heatmap` functions with the appropriate column name as an argument.
 
 If you want to look at all findings for yourself visit the [Exploratory Data Analysis](https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf) page. 
 
+
+#### Gender
 ```{python}
+#| echo: false
+#| column: body
+get_heatmap("gender")
+```
+
+According to the above heatmap, females tended to report higher levels of mental health concerns than men. However, the data only inclduded roughly 20 females and 70 males so I attributed these differences to small sample size of the original dataset.
+
+#### CGPA
+```{python}
+#| column: screen-inset
+#| echo: false
+#| layout-nrow: 1
 get_box_plot("cgpa")
 ```
 
+According to the box plots, the students who reported the highest levels of mental health concern were students with GPA's between 1.5 and 2.0. However, students with the highest GPA's (3.5-4.0) tended to also have high levels of depression, anxiety, and isolation. The later is likely due to the fact that students with higher GPA's are more likely to have be under more stress to maintain their grades at this high level. The former is likely influenced from the stress of passing their classes. Whereas students with medium GPA's (2.5-3.5) overall had very average levels of mental health concerns. 
+
+#### Average Sleep
+```{python}
+#| layout-nrow: 1
+#| echo: false
+get_heatmap("average_sleep")
+```
+
+This section clearly indicates that students who slept more reported lower levels of mental health concerns. This is likely due to the fact that students who sleep less are more likely to have been under greater stress due to a variety of factors such as staying up late to study, and not getting enough sleep.
+
+#### Campus Discrimination
+```{python}
+#| column: screen-inset
+#| layout-nrow: 1
+#| echo: false
+get_box_plot("campus_discrimination")
+```
+
+This section is also trivial with those who experienced campus discrimination reporting higher levels of mental health concerns than those who did not. This is likely due to the fact that students who were discriminated against were likely to have been under greater stress due to the discrimination.
+
+
+#### Academic Pressure
+```{python}
+#| layout-nrow: 1
+#| echo: false
+get_heatmap("academic_pressure")
+```
+
+According to the heatmap, students who reported higher levels of academic pressure similarly reported higher levels of mental health concerns. Most probably due to the fact that this increased level of pressure attributed to higher levels of stress, thus higher levels of mental health concerns.
+
+#### Academic Workload
+```{python}
+#| layout-nrow: 1
+#| echo: false
+get_heatmap("academic_workload ")
+```
+
+This heatmap also indicates that those who reported higher levels of academic workload were more likely to have reported higher levels of mental health concerns. Likely due to increased workload leading to higher levels of stress. However, for levels of isolation, there is little distinction between those who reported academic workloads between 2 and 4. Interestingly enough, those with the highest workload reported the highest levels of future insecurity, which should be the opposite of what we would expect.
+
+#### Financial Concerns
+```{python}
+#| layout-nrow: 1
+#| echo: false
+get_heatmap("financial_concerns")
+```
+
+This heatmap indicates that only students with level 5 financial concerns reported higher levels of mental health concerns. This might suggest that financial concerns are only a major stress factor for students with the highest levels of financial concerns.
+
+#### Social Relationships
+```{python}
+#| layout-nrow: 1
+#| echo: false
+get_heatmap("social_relationships")
+```
+
+The heatmap clearly indicated that those with poorer social relationships reported higher levels of mental health concerns. This might suggest that social relationships are highly beneficial for mental health. There is however a slight increase in mental health concerns for those with the highest levels of social relationships, which I attribute to uneven sample size of the original dataset as there were only 6 students that reported the highest level of social relationships.
+
+#### Sports Engagement
+```{python}
+#| layout-nrow: 1
+#| echo: false
+get_heatmap("sports_engagement")
+```
+
+This heatmap indicates that students that participate in sports 4-6 times a month had the lowest levels of mental health concerns. This might suggest that sports engagement is a positive factor for mental health. However, those who reported 7 or more times of sports engagement had some of the highest levels of mental health concerns. These people might be student athletes who are required to put a lot of time and effort into their sport, thus leading to higher levels of stress. In general, students with no sports participations reported the highest levels of mental health concerns. This might suggest that while sports engagement is a positive factor for mental health, it can also become a stress factor after a certain point.
 
 
 ## Insights
@@ -269,10 +348,7 @@ get_box_plot("cgpa")
 
 
 ### Problems
-
-
-### Improvements
-
+One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.
 
 ## Conclusion
 
