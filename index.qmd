@@ -8,35 +8,23 @@ format:
         respect-user-color-scheme: true
         code-fold: true
         code-summary: "Code"
+        code-tools: true
+        code-overflow: wrap
+        code-block-border-left: true
+        code-block-bg: true
         toc: true
 website:
   favicon: "images\\CWRU.jpg"
 ---
 
-
-```{python}
-#| output: false
-#| include: false 
-
-import pandas as pd 
-import numpy as np 
-import matplotlib.pyplot as plt 
-import seaborn as sns 
-from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import LinearRegression 
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from sklearn import preprocessing 
-from sklearn.ensemble import RandomForestRegressor
-```
-
-# Introduction
+## Introduction
 Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.
 
 The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits and use this data to predict if students were at risk for mental health disorders. Specifically, I hoped to analyze how different external pressures affect different mental health disorders. For example, the survey asked about academic pressure, academic workload, financial strain, social relationships, etc, and I hoped to use this in order to not only predict risks of mental health disorders but also to identify correlations between certain pressures and mental health disorders.
 
 In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders.
 
-# Methodology
+## Methodology
 The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:
 
 ::: {.columns}
@@ -73,8 +61,23 @@ And the dependent variables were:
 
 The tool uses a random forest model to evaluate the risk of mental health disorders. This model uses the same columns as the linear regression model. The tool uses the linear regression models to generate a risk score for each mental health concern. To further evaluate the risk of mental health disorders, the tool uses the random forest model to identify important variables in the survey. Additionally, by analyzing the weights of each variable in the regression models, exploratory can be done to understand how different external pressures affect different mental health disorders. Additionally, there was some exploratory data analysis done to better understand the survey data distribution and correlations between variables.
 
-## Data
-### Data Collection
+### Data
+#### Libraries and Tools
+As most things data science in python, this project uses pandas, numpy, sklearn, and seaborn. Pandas and numpy are different ways to better interact with csv's and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python. 
+
+```{python}
+import pandas as pd 
+import numpy as np 
+import seaborn as sns 
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn import preprocessing 
+from sklearn.ensemble import RandomForestRegressor
+```
+
+#### Data Collection
 The data used for this tool was collected from an online survey. The survey was taken from the website [https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey](https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey). This survey was a real suvey amongst students at PUCIT and asked participants about the following:
 
 ::: {.columns}
@@ -108,10 +111,12 @@ The data used for this tool was collected from an online survey. The survey was 
 
 While not all of the columns were used in the tool itself, some of the columns were used in some exploratory data analysis for the survey data.
 
-### Data Cleaning
+#### Data Cleaning
 The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values. 
 
 Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.
+
+There were other things I did to clean the data which is dropping certain columns that were less relevant to my use case such as the University column. This is because the data itself only has roughly 90 entries and there is not enough of a variety of universities to draw any meaningful conclusions.
 
 ```{python}
 #| output: false
@@ -148,7 +153,7 @@ df =df.replace(to_replace="7-8 hrs", value=8)
 x = df.drop(['depression', 'anxiety', 'isolation', 'future_insecurity', 'gender', 'age', 'academic_year'], axis=1)
 ```
 
-## Regression Models
+### Regression Models
 The regression tools used for this project were from the python library "sklearn" and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.
 
 ```{python}
@@ -192,31 +197,86 @@ y = [depression, anxiety, isolation, insecurity]
 y_names = ["depression", "anxiety", "isolation", "future_insecurity"]
 ```
 
-# Results
-## Tool
+### Plots
+For this section I will mainly focus on heatmaps and box plots to analyze correlations between specific variables and mental health issues. The dependent variable for these plots are the various mental health concerns measured in the survey (Depression, Anxiety, Isolation, Future Insecurity). Whereas there are a variety of independent variables that will be measured. Quick remind on how box plots work is that they plot the mean and their quartiles. The heatmaps display the mean of each coupled variable (example: average isolation score of women) and display the mean along a gradient. A darker color indicates a higher mean of mental score, whereas a lighter color indicates a lower score. 
+
+```{python}
+#| column: screen-inset-shaded
+#| layout-nrow: 1
+
+def get_box_plot(i):
+    sns.set_theme(style="darkgrid")
+    for m in y:
+        plt.figure(figsize=(5,4))
+        sns.boxplot(x=dfall[i], y=m)
+        plt.show()
+
+def get_heatmap(m):
+  pivot = (dfall.groupby(m)[y_names].mean())
+
+  plt.figure(figsize=(12, 5))
+
+  sns.heatmap(pivot, annot=True, cmap="flare", fmt=".2f", cbar_kws={'label': 'Mean Value'})
+  plt.title('Mental Health Factors by ' + m)
+  plt.ylabel(m)
+  plt.show()
+
+```
+
+### Formatting
+This project was formatted using quarto which essentially is a more adaptable and advanced form of jupyter notebooks. As shown in this document, it allows for a well formated document containing various code blocks, html formatting options, and markdown compatability. For data science needs Quarto is almost a one stop shop for its wide use cases and adaptability. Additionally its compatable with a variety of IDEs such as VSCode, Neovim, and RStudio. I encourage anyone interested in data science endeavors to check out Quarto because it is quite powerful. 
+
+## Results
+### Tool
+The actual implementation of the tool is quite simple. The code simply iterates through the different independent variables for the linear regression. At each iteration it asks the user for their score for each field. After it has collected the scores, the tool uses the collected user scores and the different linear regressions to determine the user's risk score. 
+
+```{{python}}
+#| output: false
+x_names = x.columns
+
+user_input = []
+
+for name in x_names:
+    user_input.append(int(input("Input for " + name + ":\n")))
+
+user_input = np.array(user_input)
+
+for i in range(len(y_names)):
+    print("Predicted risk of " + y_names[i] +": ")
+    print(models[i].predict(user_input.reshape(1,-1)))
+```
+
 
 TODO:
 
 - Add tool results
-- Add tool code
-- Add tool description
 - Add tool screenshots
 
-## Exploratory Data Analysis
-For this section I mainly focused at heatmaps and box plots to analyze correlations between specific variables and mental health issues. If you want to look at all findings for yourself visit the [Exploratory Data Analysis](https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf) page.
+### Exploratory Data Analysis
 
-# Impacts
+Here we can analyze a set of selected plots and draw conclusions based on the suvery data.
+
+If you want to look at all findings for yourself visit the [Exploratory Data Analysis](https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf) page. 
+
+```{python}
+get_box_plot("cgpa")
+```
 
 
-# Problems
+
+## Insights
+### Impacts
 
 
-# Improvements
+### Problems
 
 
-# Conclusion
+### Improvements
 
-# References
+
+## Conclusion
+
+## References
 McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.
 
 “Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.
@@ -226,3 +286,15 @@ Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College
 “New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.
 
 Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey
+
+Python
+
+Pandas
+
+Numpy
+
+Seaborn
+
+SKlearn
+
+Quarto
