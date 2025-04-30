@@ -22,7 +22,7 @@ Student mental health has become a growing concern in higher education, with rec
 
 The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits and use this data to predict if students were at risk for mental health disorders. Specifically, I hoped to analyze how different external pressures affect different mental health disorders. For example, the survey asked about academic pressure, academic workload, financial strain, social relationships, etc, and I hoped to use this in order to not only predict risks of mental health disorders but also to identify correlations between certain pressures and mental health disorders.
 
-In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders.
+In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders. This kind of bias is called the self report bias where peaople misreport themselves in the survey data. This is a problem across all surveys however my tool hopes to leverage this bias in order to better understand the mental health of students.
 
 ## Methodology
 The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:
@@ -63,7 +63,7 @@ The tool uses a random forest model to evaluate the risk of mental health disord
 
 ### Data
 #### Libraries and Tools
-As most things data science in python, this project uses pandas, numpy, sklearn, and seaborn. Pandas and numpy are different ways to better interact with csv's and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python. 
+As most things data science in python, this project uses pandas, numpy, scikit-learn, and seaborn. Pandas and numpy are different ways to better interact with csv's and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python. 
 
 ```{python}
 import pandas as pd 
@@ -154,7 +154,7 @@ x = df.drop(['depression', 'anxiety', 'isolation', 'future_insecurity', 'gender'
 ```
 
 ### Regression Models
-The regression tools used for this project were from the python library "sklearn" and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.
+The regression tools used for this project were from the python library scikit-learn and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.
 
 ```{python}
 #| output: false
@@ -244,12 +244,29 @@ for i in range(len(y_names)):
     print(models[i].predict(user_input.reshape(1,-1)))
 ```
 
+#### Examples
 
-TODO:
+:::{#example layout-ncol=2} 
+![User Identified as Low Risk](images/LowRisk.png){width="70%"}
 
-- Add tool results
-- Add tool screenshots
-- Export weights
+![User Identified as High Risk](images/HighRisk.png){width="70%"}
+:::
+
+#### Linear Regression Coefficients
+
+```{python}
+for i in range(len(x.columns)):
+  print()
+  print(x.columns[i])
+  for model in models:
+    print(round(model.coef_[i], 7), end="\t")
+```
+
+The above code simply iterates through each independent variable and prints out the coefficient for each linear regression. To read the output, the columns are (in order): depression, anxiety, isolation, insecurity. In general, higher magnitude of a coefficient indicates a stronger association between the independent variable and higher risk of mental health issues. Negative coefficients indicate a negative association between the independent variable and higher risk of mental health issues.
+
+Now for actually analyzing the coeffecients, academic pressure and workload had the highest coeffecients indicating a higher weight for determining a students risk factor. For isolation, social relationships had the highest weight magnitude, specifically indicating that a poorer social relationship was associated with higher risk of isolation. This makes sense as isolation is often a result of feeling disconnected from those around you. As for future insecurity, the most important factor was study satisfaction. The coeffeecient in this case was negative, which means that a higher study satisfaction was associated with lower risk of future insecurity.
+
+Most suprisingly to me was average sleep and sports engagement having some of the lowest coeffecients indicating a weak relationship bbetween these independent variables and the depedent variables.
 
 ### Exploratory Data Analysis
 
@@ -350,6 +367,8 @@ This heatmap indicates that students that participate in sports 4-6 times a mont
 ### Problems
 One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.
 
+Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more "normal" and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed. 
+
 ## Conclusion
 
 ## References
@@ -363,14 +382,16 @@ Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College
 
 Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey
 
-Python
+PYTHON. “Python.” Python.org, Python.org, www.python.org/.
 
-Pandas
+“Python Data Analysis Library.” Pydata.org, 2018, pandas.pydata.org/.
 
-Numpy
+Numpy. “NumPy.” Numpy.org, 2024, numpy.org/.
 
-Seaborn
+“Seaborn: Statistical Data Visualization — Seaborn 0.11.2 Documentation.” Seaborn.pydata.org, seaborn.pydata.org/#.
 
-SKlearn
+Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.3 Documentation.” Scikit-Learn.org, 2019, scikit-learn.org/stable/index.html.
 
-Quarto
+“Quarto.” Quarto.org, quarto.org/.
+
+Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol. 9, no. 1, 4 May 2016, pp. 211–217, https://doi.org/10.2147%2FJMDH.S104807.
