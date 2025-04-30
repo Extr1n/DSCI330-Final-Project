@@ -362,12 +362,21 @@ This heatmap indicates that students that participate in sports 4-6 times a mont
 
 ## Insights
 ### Impacts
+First of all, the tool is able to correctly identify students who are at risk of mental health issues. This tool can be used to help identify students who are at risk of mental health issues and provide them with the resources they need. This tool can easily differentiate between low risk and high risk students which is quite useful. 
+
+An interesting insight that can be derived from the exploratory data analysis is a stronger presence of catastrophizing in the high risk group. Catastrophizing is a cognitive distortion where people overly despair without an objective reason to (Psychology Today). In the heatmap found in the [Academic Workload](#academic-workload) section, it shows that students who are doing the most work reported the highest levels of future insecurity. This is counter intuitive because if one is doing more work, then this should reflect in the workplace and should be more secure in the future. However we find this is not the case in this group.
+
+Similarly, students with the highest [CGPA](#cgpa) reported the second highest levels of mental health concerns (second to students with CGPA's between 1.5-2.0). In general, students with the highest GPA's should be feel more secure, however, the increased mental health concerns probably stem from increased stress to maintain a high CGPA. Take for example, a student with a 4.0 and a 3.4 GPA. The student with the 4.0 will likely be more stressed than the student with the 3.4 because a single "B" on their transcript would messup their 4.0 GPA. This might explain why students with the highest CGPA reported the second highest levels of mental health concerns.
+
+Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one's perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.
 
 
 ### Problems
 One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.
 
 Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more "normal" and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed. 
+
+Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.
 
 ## Conclusion
 
@@ -395,3 +404,5 @@ Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.
 “Quarto.” Quarto.org, quarto.org/.
 
 Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol. 9, no. 1, 4 May 2016, pp. 211–217, https://doi.org/10.2147%2FJMDH.S104807.
+
+“Catastrophizing | Psychology Today.” Www.psychologytoday.com, www.psychologytoday.com/us/basics/catastrophizing.

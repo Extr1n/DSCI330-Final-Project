@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="libraries-and-tools" class="level4">
 <h4 class="anchored" data-anchor-id="libraries-and-tools">Libraries and Tools</h4>
 <p>As most things data science in python, this project uses pandas, numpy, scikit-learn, and seaborn. Pandas and numpy are different ways to better interact with csv’s and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python.</p>
-<div id="5007964e" class="cell" data-execution_count="1">
+<div id="2792b470" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values.</p>
 <p>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</p>
 <p>There were other things I did to clean the data which is dropping certain columns that were less relevant to my use case such as the University column. This is because the data itself only has roughly 90 entries and there is not enough of a variety of universities to draw any meaningful conclusions.</p>
-<div id="d655fa3b" class="cell" data-execution_count="2">
+<div id="e0d7fa1b" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="regression-models" class="level3">
 <h3 class="anchored" data-anchor-id="regression-models">Regression Models</h3>
 <p>The regression tools used for this project were from the python library scikit-learn and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</p>
-<div id="987cdb7a" class="cell" data-execution_count="3">
+<div id="402dca93" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="plots" class="level3">
 <h3 class="anchored" data-anchor-id="plots">Plots</h3>
 <p>For this section I will mainly focus on heatmaps and box plots to analyze correlations between specific variables and mental health issues. The dependent variable for these plots are the various mental health concerns measured in the survey (Depression, Anxiety, Isolation, Future Insecurity). Whereas there are a variety of independent variables that will be measured. Quick remind on how box plots work is that they plot the mean and their quartiles. The heatmaps display the mean of each coupled variable (example: average isolation score of women) and display the mean along a gradient. A darker color indicates a higher mean of mental score, whereas a lighter color indicates a lower score.</p>
-<div id="eeeee9e5" class="cell" data-execution_count="4">
+<div id="b44b5354" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_box_plot(i):</span>
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="linear-regression-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="linear-regression-coefficients">Linear Regression Coefficients</h4>
-<div id="1996345b" class="cell" data-execution_count="5">
+<div id="0e09af7e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x.columns)):</span>
@@ -438,7 +438,7 @@ social_relationships
 <p>If you want to look at all findings for yourself visit the <a href="https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf">Exploratory Data Analysis</a> page.</p>
 <section id="gender" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="gender">Gender</h4>
-<div id="07b5eca4" class="cell page-columns page-full" data-execution_count="6">
+<div id="e25a63c0" class="cell page-columns page-full" data-execution_count="6">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -454,7 +454,7 @@ social_relationships
 <div>
 
 </div>
-<div id="4dd61352" class="cell column-screen-inset quarto-layout-panel" data-layout-nrow="1" data-execution_count="7">
+<div id="497f246a" class="cell column-screen-inset quarto-layout-panel" data-execution_count="7" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid" width="444"></p>
@@ -477,7 +477,7 @@ social_relationships
 <div>
 
 </div>
-<div id="8c8980e5" class="cell quarto-layout-panel" data-layout-nrow="1" data-execution_count="8">
+<div id="cce0e759" class="cell quarto-layout-panel" data-execution_count="8" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid" width="766"></p>
@@ -491,7 +491,7 @@ social_relationships
 <div>
 
 </div>
-<div id="b1f8fc8c" class="cell column-screen-inset quarto-layout-panel" data-layout-nrow="1" data-execution_count="9">
+<div id="4f488d20" class="cell column-screen-inset quarto-layout-panel" data-execution_count="9" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid" width="444"></p>
@@ -514,7 +514,7 @@ social_relationships
 <div>
 
 </div>
-<div id="fbe9a299" class="cell quarto-layout-panel" data-layout-nrow="1" data-execution_count="10">
+<div id="5aa3c689" class="cell quarto-layout-panel" data-execution_count="10" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-11-output-1.png" class="img-fluid" width="774"></p>
@@ -528,7 +528,7 @@ social_relationships
 <div>
 
 </div>
-<div id="e9435ce9" class="cell quarto-layout-panel" data-layout-nrow="1" data-execution_count="11">
+<div id="42db7772" class="cell quarto-layout-panel" data-execution_count="11" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid" width="766"></p>
@@ -542,7 +542,7 @@ social_relationships
 <div>
 
 </div>
-<div id="de8375f2" class="cell quarto-layout-panel" data-layout-nrow="1" data-execution_count="12">
+<div id="5126203b" class="cell quarto-layout-panel" data-execution_count="12" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-13-output-1.png" class="img-fluid" width="766"></p>
@@ -556,7 +556,7 @@ social_relationships
 <div>
 
 </div>
-<div id="11ccf2a8" class="cell quarto-layout-panel" data-layout-nrow="1" data-execution_count="13">
+<div id="de4da4bd" class="cell quarto-layout-panel" data-execution_count="13" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-14-output-1.png" class="img-fluid" width="766"></p>
@@ -570,7 +570,7 @@ social_relationships
 <div>
 
 </div>
-<div id="6bffacd1" class="cell quarto-layout-panel" data-layout-nrow="1" data-execution_count="14">
+<div id="471a2bec" class="cell quarto-layout-panel" data-execution_count="14" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-15-output-1.png" class="img-fluid" width="766"></p>
@@ -585,11 +585,16 @@ social_relationships
 <h2 class="anchored" data-anchor-id="insights">Insights</h2>
 <section id="impacts" class="level3">
 <h3 class="anchored" data-anchor-id="impacts">Impacts</h3>
+<p>First of all, the tool is able to correctly identify students who are at risk of mental health issues. This tool can be used to help identify students who are at risk of mental health issues and provide them with the resources they need. This tool can easily differentiate between low risk and high risk students which is quite useful.</p>
+<p>An interesting insight that can be derived from the exploratory data analysis is a stronger presence of catastrophizing in the high risk group. Catastrophizing is a cognitive distortion where people overly despair without an objective reason to (Psychology Today). In the heatmap found in the <a href="#academic-workload">Academic Workload</a> section, it shows that students who are doing the most work reported the highest levels of future insecurity. This is counter intuitive because if one is doing more work, then this should reflect in the workplace and should be more secure in the future. However we find this is not the case in this group.</p>
+<p>Similarly, students with the highest <a href="#cgpa">CGPA</a> reported the second highest levels of mental health concerns (second to students with CGPA’s between 1.5-2.0). In general, students with the highest GPA’s should be feel more secure, however, the increased mental health concerns probably stem from increased stress to maintain a high CGPA. Take for example, a student with a 4.0 and a 3.4 GPA. The student with the 4.0 will likely be more stressed than the student with the 3.4 because a single “B” on their transcript would messup their 4.0 GPA. This might explain why students with the highest CGPA reported the second highest levels of mental health concerns.</p>
+<p>Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one’s perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.</p>
 </section>
 <section id="problems" class="level3">
 <h3 class="anchored" data-anchor-id="problems">Problems</h3>
 <p>One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.</p>
 <p>Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more “normal” and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed.</p>
+<p>Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.</p>
 </section>
 </section>
 <section id="conclusion" class="level2">
@@ -609,6 +614,7 @@ social_relationships
 <p>Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.3 Documentation.” Scikit-Learn.org, 2019, scikit-learn.org/stable/index.html.</p>
 <p>“Quarto.” Quarto.org, quarto.org/.</p>
 <p>Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol.&nbsp;9, no. 1, 4 May 2016, pp.&nbsp;211–217, https://doi.org/10.2147%2FJMDH.S104807.</p>
+<p>“Catastrophizing | Psychology Today.” Www.psychologytoday.com, www.psychologytoday.com/us/basics/catastrophizing.</p>
 <!-- -->
 
 </section>
@@ -1446,39 +1452,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-389"><a href="#cb8-389" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-390"><a href="#cb8-390" aria-hidden="true" tabindex="-1"></a><span class="fu">## Insights</span></span>
 <span id="cb8-391"><a href="#cb8-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### Impacts</span></span>
-<span id="cb8-392"><a href="#cb8-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-392"><a href="#cb8-392" aria-hidden="true" tabindex="-1"></a>First of all, the tool is able to correctly identify students who are at risk of mental health issues. This tool can be used to help identify students who are at risk of mental health issues and provide them with the resources they need. This tool can easily differentiate between low risk and high risk students which is quite useful. </span>
 <span id="cb8-393"><a href="#cb8-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-394"><a href="#cb8-394" aria-hidden="true" tabindex="-1"></a><span class="fu">### Problems</span></span>
-<span id="cb8-395"><a href="#cb8-395" aria-hidden="true" tabindex="-1"></a>One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.</span>
-<span id="cb8-396"><a href="#cb8-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-397"><a href="#cb8-397" aria-hidden="true" tabindex="-1"></a>Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more "normal" and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed. </span>
-<span id="cb8-398"><a href="#cb8-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-399"><a href="#cb8-399" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
+<span id="cb8-394"><a href="#cb8-394" aria-hidden="true" tabindex="-1"></a>An interesting insight that can be derived from the exploratory data analysis is a stronger presence of catastrophizing in the high risk group. Catastrophizing is a cognitive distortion where people overly despair without an objective reason to (Psychology Today). In the heatmap found in the <span class="co">[</span><span class="ot">Academic Workload</span><span class="co">](#academic-workload)</span> section, it shows that students who are doing the most work reported the highest levels of future insecurity. This is counter intuitive because if one is doing more work, then this should reflect in the workplace and should be more secure in the future. However we find this is not the case in this group.</span>
+<span id="cb8-395"><a href="#cb8-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-396"><a href="#cb8-396" aria-hidden="true" tabindex="-1"></a>Similarly, students with the highest <span class="co">[</span><span class="ot">CGPA</span><span class="co">](#cgpa)</span> reported the second highest levels of mental health concerns (second to students with CGPA's between 1.5-2.0). In general, students with the highest GPA's should be feel more secure, however, the increased mental health concerns probably stem from increased stress to maintain a high CGPA. Take for example, a student with a 4.0 and a 3.4 GPA. The student with the 4.0 will likely be more stressed than the student with the 3.4 because a single "B" on their transcript would messup their 4.0 GPA. This might explain why students with the highest CGPA reported the second highest levels of mental health concerns.</span>
+<span id="cb8-397"><a href="#cb8-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-398"><a href="#cb8-398" aria-hidden="true" tabindex="-1"></a>Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one's perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.</span>
+<span id="cb8-399"><a href="#cb8-399" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-400"><a href="#cb8-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-401"><a href="#cb8-401" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
-<span id="cb8-402"><a href="#cb8-402" aria-hidden="true" tabindex="-1"></a>McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.</span>
+<span id="cb8-401"><a href="#cb8-401" aria-hidden="true" tabindex="-1"></a><span class="fu">### Problems</span></span>
+<span id="cb8-402"><a href="#cb8-402" aria-hidden="true" tabindex="-1"></a>One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.</span>
 <span id="cb8-403"><a href="#cb8-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-404"><a href="#cb8-404" aria-hidden="true" tabindex="-1"></a>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</span>
+<span id="cb8-404"><a href="#cb8-404" aria-hidden="true" tabindex="-1"></a>Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more "normal" and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed. </span>
 <span id="cb8-405"><a href="#cb8-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-406"><a href="#cb8-406" aria-hidden="true" tabindex="-1"></a>Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol. 13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</span>
+<span id="cb8-406"><a href="#cb8-406" aria-hidden="true" tabindex="-1"></a>Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.</span>
 <span id="cb8-407"><a href="#cb8-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-408"><a href="#cb8-408" aria-hidden="true" tabindex="-1"></a>“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.</span>
+<span id="cb8-408"><a href="#cb8-408" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
 <span id="cb8-409"><a href="#cb8-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-410"><a href="#cb8-410" aria-hidden="true" tabindex="-1"></a>Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</span>
-<span id="cb8-411"><a href="#cb8-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-412"><a href="#cb8-412" aria-hidden="true" tabindex="-1"></a>PYTHON. “Python.” Python.org, Python.org, www.python.org/.</span>
-<span id="cb8-413"><a href="#cb8-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-414"><a href="#cb8-414" aria-hidden="true" tabindex="-1"></a>“Python Data Analysis Library.” Pydata.org, 2018, pandas.pydata.org/.</span>
-<span id="cb8-415"><a href="#cb8-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-416"><a href="#cb8-416" aria-hidden="true" tabindex="-1"></a>Numpy. “NumPy.” Numpy.org, 2024, numpy.org/.</span>
-<span id="cb8-417"><a href="#cb8-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-418"><a href="#cb8-418" aria-hidden="true" tabindex="-1"></a>“Seaborn: Statistical Data Visualization — Seaborn 0.11.2 Documentation.” Seaborn.pydata.org, seaborn.pydata.org/#.</span>
-<span id="cb8-419"><a href="#cb8-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-420"><a href="#cb8-420" aria-hidden="true" tabindex="-1"></a>Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.3 Documentation.” Scikit-Learn.org, 2019, scikit-learn.org/stable/index.html.</span>
-<span id="cb8-421"><a href="#cb8-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-422"><a href="#cb8-422" aria-hidden="true" tabindex="-1"></a>“Quarto.” Quarto.org, quarto.org/.</span>
-<span id="cb8-423"><a href="#cb8-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-424"><a href="#cb8-424" aria-hidden="true" tabindex="-1"></a>Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol. 9, no. 1, 4 May 2016, pp. 211–217, https://doi.org/10.2147%2FJMDH.S104807.</span>
+<span id="cb8-410"><a href="#cb8-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb8-411"><a href="#cb8-411" aria-hidden="true" tabindex="-1"></a>McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.</span>
+<span id="cb8-412"><a href="#cb8-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-413"><a href="#cb8-413" aria-hidden="true" tabindex="-1"></a>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</span>
+<span id="cb8-414"><a href="#cb8-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-415"><a href="#cb8-415" aria-hidden="true" tabindex="-1"></a>Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol. 13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</span>
+<span id="cb8-416"><a href="#cb8-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-417"><a href="#cb8-417" aria-hidden="true" tabindex="-1"></a>“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.</span>
+<span id="cb8-418"><a href="#cb8-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-419"><a href="#cb8-419" aria-hidden="true" tabindex="-1"></a>Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</span>
+<span id="cb8-420"><a href="#cb8-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-421"><a href="#cb8-421" aria-hidden="true" tabindex="-1"></a>PYTHON. “Python.” Python.org, Python.org, www.python.org/.</span>
+<span id="cb8-422"><a href="#cb8-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-423"><a href="#cb8-423" aria-hidden="true" tabindex="-1"></a>“Python Data Analysis Library.” Pydata.org, 2018, pandas.pydata.org/.</span>
+<span id="cb8-424"><a href="#cb8-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-425"><a href="#cb8-425" aria-hidden="true" tabindex="-1"></a>Numpy. “NumPy.” Numpy.org, 2024, numpy.org/.</span>
+<span id="cb8-426"><a href="#cb8-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-427"><a href="#cb8-427" aria-hidden="true" tabindex="-1"></a>“Seaborn: Statistical Data Visualization — Seaborn 0.11.2 Documentation.” Seaborn.pydata.org, seaborn.pydata.org/#.</span>
+<span id="cb8-428"><a href="#cb8-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-429"><a href="#cb8-429" aria-hidden="true" tabindex="-1"></a>Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.3 Documentation.” Scikit-Learn.org, 2019, scikit-learn.org/stable/index.html.</span>
+<span id="cb8-430"><a href="#cb8-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-431"><a href="#cb8-431" aria-hidden="true" tabindex="-1"></a>“Quarto.” Quarto.org, quarto.org/.</span>
+<span id="cb8-432"><a href="#cb8-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-433"><a href="#cb8-433" aria-hidden="true" tabindex="-1"></a>Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol. 9, no. 1, 4 May 2016, pp. 211–217, https://doi.org/10.2147%2FJMDH.S104807.</span>
+<span id="cb8-434"><a href="#cb8-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-435"><a href="#cb8-435" aria-hidden="true" tabindex="-1"></a>“Catastrophizing | Psychology Today.” Www.psychologytoday.com, www.psychologytoday.com/us/basics/catastrophizing.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
