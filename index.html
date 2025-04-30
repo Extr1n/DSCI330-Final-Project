@@ -120,7 +120,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#impacts" id="toc-impacts" class="nav-link" data-scroll-target="#impacts">Impacts</a></li>
   <li><a href="#problems" id="toc-problems" class="nav-link" data-scroll-target="#problems">Problems</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -136,6 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Student mental health has become a growing concern in higher education, with recent surveys indicating unprecedented levels of psychological distress. For example, a nationwide study of 33,000 college students found that half of students screened positive for depression and/or anxiety in late 2020 (Depression, Anxiety, Loneliness Are Peaking in College Students | The Brink | Boston University). These mental health difficulties can severely hinder students’ lives – reducing their quality of life, academic achievement, physical health, and satisfaction with the college experience (Consequences of Student Mental Health Issues – Suicide Prevention Resource Center). Given these stakes, it is crucial to understand how external pressures contribute to student mental health outcomes. College life often confronts students with multiple stressors, among which academic pressure, financial concerns, and social relationships are thought to play major roles. Academic stress is frequently cited as the dominant source of stress for students (Frontiers | Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19), financial strain has been linked to higher risk of depression and anxiety, and social isolation or poor support networks can dramatically increase psychological distress (New Data Emphasizes the Correlation Between Loneliness and Student Mental Health - Active Minds). This study aims to examine how these three factors impact symptoms of depression, anxiety, and isolation in students. By quantifying their effects and interactions, we can better understand the nuances of student mental health and inform interventions to improve well-being and academic success.</p>
 <p>The idea behind this project was to pay special attention to the mental health of students. Specifically, the tool hopes to identify students who may be higher risk in an attempt to make it easier for doctors to identify students at a higher risk. While this tool is not specifically designed to diagnose students with mental health disorders, it may aid doctors in diagnosing students. Ultimately this project is a tool, not a magic diagnosing device. The way that this project hoped to achieve success was to mimic the wellness survey at the start of most regular checkup visits and use this data to predict if students were at risk for mental health disorders. Specifically, I hoped to analyze how different external pressures affect different mental health disorders. For example, the survey asked about academic pressure, academic workload, financial strain, social relationships, etc, and I hoped to use this in order to not only predict risks of mental health disorders but also to identify correlations between certain pressures and mental health disorders.</p>
 <p>In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders. This kind of bias is called the self report bias where peaople misreport themselves in the survey data. This is a problem across all surveys however my tool hopes to leverage this bias in order to better understand the mental health of students.</p>
+<p>Overall, this tool aims to better understand student mental health and identify which pressures most contribute to student mental health outcomes.</p>
 </section>
 <section id="methodology" class="level2">
 <h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="libraries-and-tools" class="level4">
 <h4 class="anchored" data-anchor-id="libraries-and-tools">Libraries and Tools</h4>
 <p>As most things data science in python, this project uses pandas, numpy, scikit-learn, and seaborn. Pandas and numpy are different ways to better interact with csv’s and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python.</p>
-<div id="2792b470" class="cell" data-execution_count="1">
+<div id="ac3f239f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values.</p>
 <p>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</p>
 <p>There were other things I did to clean the data which is dropping certain columns that were less relevant to my use case such as the University column. This is because the data itself only has roughly 90 entries and there is not enough of a variety of universities to draw any meaningful conclusions.</p>
-<div id="e0d7fa1b" class="cell" data-execution_count="2">
+<div id="cd378ad0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="regression-models" class="level3">
 <h3 class="anchored" data-anchor-id="regression-models">Regression Models</h3>
 <p>The regression tools used for this project were from the python library scikit-learn and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</p>
-<div id="402dca93" class="cell" data-execution_count="3">
+<div id="95c6aa5d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="plots" class="level3">
 <h3 class="anchored" data-anchor-id="plots">Plots</h3>
 <p>For this section I will mainly focus on heatmaps and box plots to analyze correlations between specific variables and mental health issues. The dependent variable for these plots are the various mental health concerns measured in the survey (Depression, Anxiety, Isolation, Future Insecurity). Whereas there are a variety of independent variables that will be measured. Quick remind on how box plots work is that they plot the mean and their quartiles. The heatmaps display the mean of each coupled variable (example: average isolation score of women) and display the mean along a gradient. A darker color indicates a higher mean of mental score, whereas a lighter color indicates a lower score.</p>
-<div id="b44b5354" class="cell" data-execution_count="4">
+<div id="42e3c812" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_box_plot(i):</span>
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="linear-regression-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="linear-regression-coefficients">Linear Regression Coefficients</h4>
-<div id="0e09af7e" class="cell" data-execution_count="5">
+<div id="8a7f5ed5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x.columns)):</span>
@@ -438,7 +438,7 @@ social_relationships
 <p>If you want to look at all findings for yourself visit the <a href="https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf">Exploratory Data Analysis</a> page.</p>
 <section id="gender" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="gender">Gender</h4>
-<div id="e25a63c0" class="cell page-columns page-full" data-execution_count="6">
+<div id="b82f28ff" class="cell page-columns page-full" data-execution_count="6">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -454,7 +454,7 @@ social_relationships
 <div>
 
 </div>
-<div id="497f246a" class="cell column-screen-inset quarto-layout-panel" data-execution_count="7" data-layout-nrow="1">
+<div id="c9114522" class="cell column-screen-inset quarto-layout-panel" data-execution_count="7" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid" width="444"></p>
@@ -477,7 +477,7 @@ social_relationships
 <div>
 
 </div>
-<div id="cce0e759" class="cell quarto-layout-panel" data-execution_count="8" data-layout-nrow="1">
+<div id="55a480b3" class="cell quarto-layout-panel" data-execution_count="8" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid" width="766"></p>
@@ -491,7 +491,7 @@ social_relationships
 <div>
 
 </div>
-<div id="4f488d20" class="cell column-screen-inset quarto-layout-panel" data-execution_count="9" data-layout-nrow="1">
+<div id="a76c910d" class="cell column-screen-inset quarto-layout-panel" data-execution_count="9" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid" width="444"></p>
@@ -514,7 +514,7 @@ social_relationships
 <div>
 
 </div>
-<div id="5aa3c689" class="cell quarto-layout-panel" data-execution_count="10" data-layout-nrow="1">
+<div id="f528b824" class="cell quarto-layout-panel" data-execution_count="10" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-11-output-1.png" class="img-fluid" width="774"></p>
@@ -528,7 +528,7 @@ social_relationships
 <div>
 
 </div>
-<div id="42db7772" class="cell quarto-layout-panel" data-execution_count="11" data-layout-nrow="1">
+<div id="947736ce" class="cell quarto-layout-panel" data-execution_count="11" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid" width="766"></p>
@@ -542,7 +542,7 @@ social_relationships
 <div>
 
 </div>
-<div id="5126203b" class="cell quarto-layout-panel" data-execution_count="12" data-layout-nrow="1">
+<div id="ccae730b" class="cell quarto-layout-panel" data-execution_count="12" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-13-output-1.png" class="img-fluid" width="766"></p>
@@ -556,7 +556,7 @@ social_relationships
 <div>
 
 </div>
-<div id="de4da4bd" class="cell quarto-layout-panel" data-execution_count="13" data-layout-nrow="1">
+<div id="c98a5944" class="cell quarto-layout-panel" data-execution_count="13" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-14-output-1.png" class="img-fluid" width="766"></p>
@@ -570,7 +570,7 @@ social_relationships
 <div>
 
 </div>
-<div id="471a2bec" class="cell quarto-layout-panel" data-execution_count="14" data-layout-nrow="1">
+<div id="a1e1772b" class="cell quarto-layout-panel" data-execution_count="14" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <p><img src="index_files/figure-html/cell-15-output-1.png" class="img-fluid" width="766"></p>
@@ -589,16 +589,17 @@ social_relationships
 <p>An interesting insight that can be derived from the exploratory data analysis is a stronger presence of catastrophizing in the high risk group. Catastrophizing is a cognitive distortion where people overly despair without an objective reason to (Psychology Today). In the heatmap found in the <a href="#academic-workload">Academic Workload</a> section, it shows that students who are doing the most work reported the highest levels of future insecurity. This is counter intuitive because if one is doing more work, then this should reflect in the workplace and should be more secure in the future. However we find this is not the case in this group.</p>
 <p>Similarly, students with the highest <a href="#cgpa">CGPA</a> reported the second highest levels of mental health concerns (second to students with CGPA’s between 1.5-2.0). In general, students with the highest GPA’s should be feel more secure, however, the increased mental health concerns probably stem from increased stress to maintain a high CGPA. Take for example, a student with a 4.0 and a 3.4 GPA. The student with the 4.0 will likely be more stressed than the student with the 3.4 because a single “B” on their transcript would messup their 4.0 GPA. This might explain why students with the highest CGPA reported the second highest levels of mental health concerns.</p>
 <p>Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one’s perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.</p>
+<p>According to the <a href="#linear-regression-coefficients">Linear Regression</a>, the three biggest pressures for students with depression is academic workload, academic pressure, and financial concerns. For anxiety, the biggest pressures are academic workload, academic pressure, and social relationships. For isolations, the biggest pressures are social relationships, academic pressure, and study satisfaction. Lastly for future insecurity, the biggest pressures are study satisfaction, campus discrimination, and academic workload. Overall, this shows that students with high levels of academic workload and pressure are more likely to have depression, anxiety, isolation, and future insecurity.</p>
+<p>The data shows that there is a correlation between study satisfaction and isolation and future insecurity. This probably is from those that are unsatisfied with their studies probably feel the need to study more, leading to isolation. The need to study more also probably worries them about their capabilities in the future so they are more insecure about their future.</p>
 </section>
 <section id="problems" class="level3">
 <h3 class="anchored" data-anchor-id="problems">Problems</h3>
 <p>One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.</p>
 <p>Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more “normal” and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed.</p>
 <p>Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.</p>
+<p>In general, the issue comes with the fact that because doctor visits and the purpose of this tool require patients to fill out this survey in a way that links the results directly to them, they are more likely to lie to appear normal (social desirability bias) as opposed to an anonymous survey where they are less likely to lie.</p>
+<p>Overall, it is questionable if this tool would be useful in the real world as what the tool does well are already easily done by doctors. However, that isn’t to say that with more data there is more room for fine tunning within the models to make this tool more accurate and stronger than current doctors.</p>
 </section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
@@ -1115,387 +1116,395 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders. This kind of bias is called the self report bias where peaople misreport themselves in the survey data. This is a problem across all surveys however my tool hopes to leverage this bias in order to better understand the mental health of students.</span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methodology</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CGPA</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Residential Status</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Campus Discrimination</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sports Engagement</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Average Sleep</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Study Satisfaction</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Workload</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Pressure</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Financial Concerns</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Social Relationships</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>Overall, this tool aims to better understand student mental health and identify which pressures most contribute to student mental health outcomes.</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methodology</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CGPA</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Residential Status</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Campus Discrimination</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sports Engagement</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Average Sleep</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Study Satisfaction</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Workload</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Pressure</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Financial Concerns</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Social Relationships</span>
 <span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>And the dependent variables were:</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depression</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Anxiety</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Isolation</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Future Insecurity</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>And the dependent variables were:</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depression</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Anxiety</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Isolation</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Future Insecurity</span>
 <span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>The tool uses a random forest model to evaluate the risk of mental health disorders. This model uses the same columns as the linear regression model. The tool uses the linear regression models to generate a risk score for each mental health concern. To further evaluate the risk of mental health disorders, the tool uses the random forest model to identify important variables in the survey. Additionally, by analyzing the weights of each variable in the regression models, exploratory can be done to understand how different external pressures affect different mental health disorders. Additionally, there was some exploratory data analysis done to better understand the survey data distribution and correlations between variables.</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Libraries and Tools</span></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>As most things data science in python, this project uses pandas, numpy, scikit-learn, and seaborn. Pandas and numpy are different ways to better interact with csv's and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python. </span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns </span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split </span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression </span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, mean_absolute_error, r2_score</span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Collection</span></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>The data used for this tool was collected from an online survey. The survey was taken from the website <span class="co">[</span><span class="ot">https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</span><span class="co">](https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey)</span>. This survey was a real suvey amongst students at PUCIT and asked participants about the following:</span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
-<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gender</span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Age</span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>University</span>
-<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Degree Level</span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Degree Major</span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Year</span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CGPA</span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Residential Status</span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Campus Discrimination</span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sports Engagement</span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Average Sleep</span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Study Satisfaction</span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Workload</span>
-<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Pressure</span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Financial Concerns</span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Social Relationships</span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depression</span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Anxiety</span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Isolation</span>
-<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Future Insecurity</span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>The tool uses a random forest model to evaluate the risk of mental health disorders. This model uses the same columns as the linear regression model. The tool uses the linear regression models to generate a risk score for each mental health concern. To further evaluate the risk of mental health disorders, the tool uses the random forest model to identify important variables in the survey. Additionally, by analyzing the weights of each variable in the regression models, exploratory can be done to understand how different external pressures affect different mental health disorders. Additionally, there was some exploratory data analysis done to better understand the survey data distribution and correlations between variables.</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Libraries and Tools</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>As most things data science in python, this project uses pandas, numpy, scikit-learn, and seaborn. Pandas and numpy are different ways to better interact with csv's and math operations. Sklearn is used for the regressions and models covered in the later sections. Seaborn is a highly adaptable graph maker for python. </span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns </span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split </span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression </span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, mean_absolute_error, r2_score</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Collection</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>The data used for this tool was collected from an online survey. The survey was taken from the website <span class="co">[</span><span class="ot">https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</span><span class="co">](https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey)</span>. This survey was a real suvey amongst students at PUCIT and asked participants about the following:</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gender</span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Age</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>University</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Degree Level</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Degree Major</span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Year</span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CGPA</span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Residential Status</span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Campus Discrimination</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sports Engagement</span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>::: {.column}</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Average Sleep</span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Study Satisfaction</span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Workload</span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Academic Pressure</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Financial Concerns</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Social Relationships</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depression</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Anxiety</span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Isolation</span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Future Insecurity</span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>While not all of the columns were used in the tool itself, some of the columns were used in some exploratory data analysis for the survey data.</span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Cleaning</span></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values. </span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>While not all of the columns were used in the tool itself, some of the columns were used in some exploratory data analysis for the survey data.</span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Cleaning</span></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>The bulk of the data cleaning came from converting the data into a format that could be used in linear regression. This involved converting categorical data to numerical data, removing unnecessary columns, and removing rows with missing values. </span>
 <span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>There were other things I did to clean the data which is dropping certain columns that were less relevant to my use case such as the University column. This is because the data itself only has roughly 90 entries and there is not enough of a variety of universities to draw any meaningful conclusions.</span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>Examples would be changing Male or Female to 1 or -1, reformatting tables to make them easier to read, and removing rows with missing values.</span>
 <span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a>There were other things I did to clean the data which is dropping certain columns that were less relevant to my use case such as the University column. This is because the data itself only has roughly 90 entries and there is not enough of a variety of universities to draw any meaningful conclusions.</span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
 <span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dfall.drop([<span class="st">'university'</span>, <span class="st">'degree_level'</span>, <span class="st">'degree_major'</span>, <span class="st">'stress_relief_activities'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>dfall <span class="op">=</span> pd.read_csv(<span class="st">"data/MentalHealthSurvey.csv"</span>)</span>
 <span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Male"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Female"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1st year"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2nd year"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3rd year"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4th year"</span>, value<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"0.0-0.0"</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1.5-2.0"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2.0-2.5"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2.5-3.0"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3.0-3.5"</span>, value<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3.5-4.0"</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Off-Campus"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"On-Campus"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Yes"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"No"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"No Sports"</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1-3 times"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4-6 times"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"7+ times"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4-6 hrs"</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2-4 hrs"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"7-8 hrs"</span>, value<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df.drop([<span class="st">'depression'</span>, <span class="st">'anxiety'</span>, <span class="st">'isolation'</span>, <span class="st">'future_insecurity'</span>, <span class="st">'gender'</span>, <span class="st">'age'</span>, <span class="st">'academic_year'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regression Models</span></span>
-<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a>The regression tools used for this project were from the python library scikit-learn and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</span>
-<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
-<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
-<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a>anxiety <span class="op">=</span> df[<span class="st">'anxiety'</span>]</span>
-<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a>isolation <span class="op">=</span> df[<span class="st">'isolation'</span>]</span>
-<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a>insecurity <span class="op">=</span> df[<span class="st">'future_insecurity'</span>]</span>
-<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>dx_train, dx_test, dy_train, dy_test <span class="op">=</span> train_test_split(x, depression, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
-<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a>ax_train, ax_test, ay_train, ay_test <span class="op">=</span> train_test_split(x, anxiety, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
-<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a>ix_train, ix_test, iy_train, iy_test <span class="op">=</span> train_test_split(x, isolation, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
-<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>fx_train, fx_test, fy_train, fy_test <span class="op">=</span> train_test_split(x, insecurity, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
-<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>model_depression <span class="op">=</span> LinearRegression()</span>
-<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>rf_depression <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>model_depression.fit(dx_train, dy_train)</span>
-<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>rf_depression.fit(dx_train, dy_train)</span>
-<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>model_anxiety <span class="op">=</span> LinearRegression()</span>
-<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>rf_anxiety <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>model_anxiety.fit(ax_train, ay_train)</span>
-<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a>rf_anxiety.fit(ax_train, ay_train)</span>
-<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>model_isolation <span class="op">=</span> LinearRegression()</span>
-<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>rf_isolation <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>model_isolation.fit(ix_train, iy_train)</span>
-<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>rf_isolation.fit(ix_train, iy_train)</span>
-<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>model_insecurity <span class="op">=</span> LinearRegression()</span>
-<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a>rf_insecurity <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>model_insecurity.fit(fx_train, fy_train)</span>
-<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>rf_insecurity.fit(fx_train, fy_train)</span>
-<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [model_depression, model_anxiety, model_isolation, model_insecurity]</span>
-<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [depression, anxiety, isolation, insecurity]</span>
-<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>y_names <span class="op">=</span> [<span class="st">"depression"</span>, <span class="st">"anxiety"</span>, <span class="st">"isolation"</span>, <span class="st">"future_insecurity"</span>]</span>
-<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plots</span></span>
-<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>For this section I will mainly focus on heatmaps and box plots to analyze correlations between specific variables and mental health issues. The dependent variable for these plots are the various mental health concerns measured in the survey (Depression, Anxiety, Isolation, Future Insecurity). Whereas there are a variety of independent variables that will be measured. Quick remind on how box plots work is that they plot the mean and their quartiles. The heatmaps display the mean of each coupled variable (example: average isolation score of women) and display the mean along a gradient. A darker color indicates a higher mean of mental score, whereas a lighter color indicates a lower score. </span>
-<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_box_plot(i):</span>
-<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a>    sns.set_theme(style<span class="op">=</span><span class="st">"darkgrid"</span>)</span>
-<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> y:</span>
-<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a>        plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">4</span>))</span>
-<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>        sns.boxplot(x<span class="op">=</span>dfall[i], y<span class="op">=</span>m)</span>
-<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
-<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_heatmap(m):</span>
-<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a>  pivot <span class="op">=</span> (dfall.groupby(m)[y_names].mean())</span>
-<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a>  plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dfall.drop([<span class="st">'university'</span>, <span class="st">'degree_level'</span>, <span class="st">'degree_major'</span>, <span class="st">'stress_relief_activities'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Male"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Female"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1st year"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2nd year"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3rd year"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4th year"</span>, value<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"0.0-0.0"</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1.5-2.0"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2.0-2.5"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2.5-3.0"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3.0-3.5"</span>, value<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"3.5-4.0"</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Off-Campus"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"On-Campus"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"Yes"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"No"</span>, value<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"No Sports"</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"1-3 times"</span>, value<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4-6 times"</span>, value<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"7+ times"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"4-6 hrs"</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"2-4 hrs"</span>, value<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span>df.replace(to_replace<span class="op">=</span><span class="st">"7-8 hrs"</span>, value<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df.drop([<span class="st">'depression'</span>, <span class="st">'anxiety'</span>, <span class="st">'isolation'</span>, <span class="st">'future_insecurity'</span>, <span class="st">'gender'</span>, <span class="st">'age'</span>, <span class="st">'academic_year'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regression Models</span></span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a>The regression tools used for this project were from the python library scikit-learn and the tool used 4 different linear regressions (one for eaach mental health concern). Specifically these were: Depression, Anxiety, Isolation, and Future Insecurity. On top of the linear regression, the tool also used random forest regression to identify important variables in the survey.</span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a>depression <span class="op">=</span> df[<span class="st">'depression'</span>]</span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a>anxiety <span class="op">=</span> df[<span class="st">'anxiety'</span>]</span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a>isolation <span class="op">=</span> df[<span class="st">'isolation'</span>]</span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>insecurity <span class="op">=</span> df[<span class="st">'future_insecurity'</span>]</span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a>dx_train, dx_test, dy_train, dy_test <span class="op">=</span> train_test_split(x, depression, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>ax_train, ax_test, ay_train, ay_test <span class="op">=</span> train_test_split(x, anxiety, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>ix_train, ix_test, iy_train, iy_test <span class="op">=</span> train_test_split(x, isolation, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>fx_train, fx_test, fy_train, fy_test <span class="op">=</span> train_test_split(x, insecurity, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>model_depression <span class="op">=</span> LinearRegression()</span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>rf_depression <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>model_depression.fit(dx_train, dy_train)</span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>rf_depression.fit(dx_train, dy_train)</span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>model_anxiety <span class="op">=</span> LinearRegression()</span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>rf_anxiety <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a>model_anxiety.fit(ax_train, ay_train)</span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>rf_anxiety.fit(ax_train, ay_train)</span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>model_isolation <span class="op">=</span> LinearRegression()</span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>rf_isolation <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>model_isolation.fit(ix_train, iy_train)</span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>rf_isolation.fit(ix_train, iy_train)</span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a>model_insecurity <span class="op">=</span> LinearRegression()</span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>rf_insecurity <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a>model_insecurity.fit(fx_train, fy_train)</span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>rf_insecurity.fit(fx_train, fy_train)</span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [model_depression, model_anxiety, model_isolation, model_insecurity]</span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [depression, anxiety, isolation, insecurity]</span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>y_names <span class="op">=</span> [<span class="st">"depression"</span>, <span class="st">"anxiety"</span>, <span class="st">"isolation"</span>, <span class="st">"future_insecurity"</span>]</span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plots</span></span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>For this section I will mainly focus on heatmaps and box plots to analyze correlations between specific variables and mental health issues. The dependent variable for these plots are the various mental health concerns measured in the survey (Depression, Anxiety, Isolation, Future Insecurity). Whereas there are a variety of independent variables that will be measured. Quick remind on how box plots work is that they plot the mean and their quartiles. The heatmaps display the mean of each coupled variable (example: average isolation score of women) and display the mean along a gradient. A darker color indicates a higher mean of mental score, whereas a lighter color indicates a lower score. </span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_box_plot(i):</span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a>    sns.set_theme(style<span class="op">=</span><span class="st">"darkgrid"</span>)</span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> y:</span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a>        plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">4</span>))</span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>        sns.boxplot(x<span class="op">=</span>dfall[i], y<span class="op">=</span>m)</span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_heatmap(m):</span>
+<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a>  pivot <span class="op">=</span> (dfall.groupby(m)[y_names].mean())</span>
 <span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>  sns.heatmap(pivot, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"flare"</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cbar_kws<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Mean Value'</span>})</span>
-<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a>  plt.title(<span class="st">'Mental Health Factors by '</span> <span class="op">+</span> m)</span>
-<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>  plt.ylabel(m)</span>
-<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>  plt.show()</span>
-<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>  plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>  sns.heatmap(pivot, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"flare"</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cbar_kws<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Mean Value'</span>})</span>
+<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>  plt.title(<span class="st">'Mental Health Factors by '</span> <span class="op">+</span> m)</span>
+<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a>  plt.ylabel(m)</span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a>  plt.show()</span>
 <span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a><span class="fu">### Formatting</span></span>
-<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>This project was formatted using quarto which essentially is a more adaptable and advanced form of jupyter notebooks. As shown in this document, it allows for a well formated document containing various code blocks, html formatting options, and markdown compatability. For data science needs Quarto is almost a one stop shop for its wide use cases and adaptability. Additionally its compatable with a variety of IDEs such as VSCode, Neovim, and RStudio. I encourage anyone interested in data science endeavors to check out Quarto because it is quite powerful. </span>
-<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
-<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tool</span></span>
-<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a>The actual implementation of the tool is quite simple. The code simply iterates through the different independent variables for the linear regression. At each iteration it asks the user for their score for each field. After it has collected the scores, the tool uses the collected user scores and the different linear regressions to determine the user's risk score. </span>
-<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a><span class="in">#| output: false</span></span>
-<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a><span class="in">x_names = x.columns</span></span>
-<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a><span class="in">user_input = []</span></span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a><span class="fu">### Formatting</span></span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a>This project was formatted using quarto which essentially is a more adaptable and advanced form of jupyter notebooks. As shown in this document, it allows for a well formated document containing various code blocks, html formatting options, and markdown compatability. For data science needs Quarto is almost a one stop shop for its wide use cases and adaptability. Additionally its compatable with a variety of IDEs such as VSCode, Neovim, and RStudio. I encourage anyone interested in data science endeavors to check out Quarto because it is quite powerful. </span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tool</span></span>
+<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a>The actual implementation of the tool is quite simple. The code simply iterates through the different independent variables for the linear regression. At each iteration it asks the user for their score for each field. After it has collected the scores, the tool uses the collected user scores and the different linear regressions to determine the user's risk score. </span>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a><span class="in">#| output: false</span></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a><span class="in">x_names = x.columns</span></span>
 <span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a><span class="in">for name in x_names:</span></span>
-<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a><span class="in">    user_input.append(int(input("Input for " + name + ":\n")))</span></span>
-<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a><span class="in">user_input = np.array(user_input)</span></span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a><span class="in">user_input = []</span></span>
+<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a><span class="in">for name in x_names:</span></span>
+<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a><span class="in">    user_input.append(int(input("Input for " + name + ":\n")))</span></span>
 <span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a><span class="in">for i in range(len(y_names)):</span></span>
-<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a><span class="in">    print("Predicted risk of " + y_names[i] +": ")</span></span>
-<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a><span class="in">    print(models[i].predict(user_input.reshape(1,-1)))</span></span>
-<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Examples</span></span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a><span class="in">user_input = np.array(user_input)</span></span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a><span class="in">for i in range(len(y_names)):</span></span>
+<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a><span class="in">    print("Predicted risk of " + y_names[i] +": ")</span></span>
+<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a><span class="in">    print(models[i].predict(user_input.reshape(1,-1)))</span></span>
+<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a>:::{#example layout-ncol=2} </span>
-<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a><span class="al">![User Identified as Low Risk](images/LowRisk.png)</span>{width="70%"}</span>
-<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a><span class="al">![User Identified as High Risk](images/HighRisk.png)</span>{width="70%"}</span>
-<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Linear Regression Coefficients</span></span>
+<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Examples</span></span>
+<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a>:::{#example layout-ncol=2} </span>
+<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a><span class="al">![User Identified as Low Risk](images/LowRisk.png)</span>{width="70%"}</span>
+<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a><span class="al">![User Identified as High Risk](images/HighRisk.png)</span>{width="70%"}</span>
+<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x.columns)):</span>
-<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>()</span>
-<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(x.columns[i])</span>
-<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> model <span class="kw">in</span> models:</span>
-<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">round</span>(model.coef_[i], <span class="dv">7</span>), end<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a>The above code simply iterates through each independent variable and prints out the coefficient for each linear regression. To read the output, the columns are (in order): depression, anxiety, isolation, insecurity. In general, higher magnitude of a coefficient indicates a stronger association between the independent variable and higher risk of mental health issues. Negative coefficients indicate a negative association between the independent variable and higher risk of mental health issues.</span>
+<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Linear Regression Coefficients</span></span>
+<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x.columns)):</span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>()</span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(x.columns[i])</span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> model <span class="kw">in</span> models:</span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">round</span>(model.coef_[i], <span class="dv">7</span>), end<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a>Now for actually analyzing the coeffecients, academic pressure and workload had the highest coeffecients indicating a higher weight for determining a students risk factor. For isolation, social relationships had the highest weight magnitude, specifically indicating that a poorer social relationship was associated with higher risk of isolation. This makes sense as isolation is often a result of feeling disconnected from those around you. As for future insecurity, the most important factor was study satisfaction. The coeffeecient in this case was negative, which means that a higher study satisfaction was associated with lower risk of future insecurity.</span>
+<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a>The above code simply iterates through each independent variable and prints out the coefficient for each linear regression. To read the output, the columns are (in order): depression, anxiety, isolation, insecurity. In general, higher magnitude of a coefficient indicates a stronger association between the independent variable and higher risk of mental health issues. Negative coefficients indicate a negative association between the independent variable and higher risk of mental health issues.</span>
 <span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a>Most suprisingly to me was average sleep and sports engagement having some of the lowest coeffecients indicating a weak relationship bbetween these independent variables and the depedent variables.</span>
+<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a>Now for actually analyzing the coeffecients, academic pressure and workload had the highest coeffecients indicating a higher weight for determining a students risk factor. For isolation, social relationships had the highest weight magnitude, specifically indicating that a poorer social relationship was associated with higher risk of isolation. This makes sense as isolation is often a result of feeling disconnected from those around you. As for future insecurity, the most important factor was study satisfaction. The coeffeecient in this case was negative, which means that a higher study satisfaction was associated with lower risk of future insecurity.</span>
 <span id="cb8-279"><a href="#cb8-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exploratory Data Analysis</span></span>
+<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a>Most suprisingly to me was average sleep and sports engagement having some of the lowest coeffecients indicating a weak relationship bbetween these independent variables and the depedent variables.</span>
 <span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a>Here we can analyze a set of selected plots and draw conclusions based on the suvery data. Note that the code for these graphs are more clearly labeled in the <span class="co">[</span><span class="ot">plots</span><span class="co">](#plots)</span> section. Each plot was simply created by calling the <span class="in">`get_box_plot`</span> or <span class="in">`get_heatmap`</span> functions with the appropriate column name as an argument.</span>
+<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exploratory Data Analysis</span></span>
 <span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a>If you want to look at all findings for yourself visit the <span class="co">[</span><span class="ot">Exploratory Data Analysis</span><span class="co">](https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf)</span> page. </span>
+<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a>Here we can analyze a set of selected plots and draw conclusions based on the suvery data. Note that the code for these graphs are more clearly labeled in the <span class="co">[</span><span class="ot">plots</span><span class="co">](#plots)</span> section. Each plot was simply created by calling the <span class="in">`get_box_plot`</span> or <span class="in">`get_heatmap`</span> functions with the appropriate column name as an argument.</span>
 <span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Gender</span></span>
-<span id="cb8-290"><a href="#cb8-290" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-291"><a href="#cb8-291" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-292"><a href="#cb8-292" aria-hidden="true" tabindex="-1"></a><span class="co">#| column: body</span></span>
-<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"gender"</span>)</span>
-<span id="cb8-294"><a href="#cb8-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a>According to the above heatmap, females tended to report higher levels of mental health concerns than men. However, the data only inclduded roughly 20 females and 70 males so I attributed these differences to small sample size of the original dataset.</span>
+<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a>If you want to look at all findings for yourself visit the <span class="co">[</span><span class="ot">Exploratory Data Analysis</span><span class="co">](https://github.com/Extr1n/DSCI330-Final-Project/blob/main/PyDoc.pdf)</span> page. </span>
+<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-288"><a href="#cb8-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-289"><a href="#cb8-289" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Gender</span></span>
+<span id="cb8-292"><a href="#cb8-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-294"><a href="#cb8-294" aria-hidden="true" tabindex="-1"></a><span class="co">#| column: body</span></span>
+<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"gender"</span>)</span>
+<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-297"><a href="#cb8-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a><span class="fu">#### CGPA</span></span>
-<span id="cb8-301"><a href="#cb8-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-302"><a href="#cb8-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| column: screen-inset</span></span>
-<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-305"><a href="#cb8-305" aria-hidden="true" tabindex="-1"></a>get_box_plot(<span class="st">"cgpa"</span>)</span>
-<span id="cb8-306"><a href="#cb8-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-307"><a href="#cb8-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-308"><a href="#cb8-308" aria-hidden="true" tabindex="-1"></a>According to the box plots, the students who reported the highest levels of mental health concern were students with GPA's between 1.5 and 2.0. However, students with the highest GPA's (3.5-4.0) tended to also have high levels of depression, anxiety, and isolation. The later is likely due to the fact that students with higher GPA's are more likely to have be under more stress to maintain their grades at this high level. The former is likely influenced from the stress of passing their classes. Whereas students with medium GPA's (2.5-3.5) overall had very average levels of mental health concerns. </span>
+<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a>According to the above heatmap, females tended to report higher levels of mental health concerns than men. However, the data only inclduded roughly 20 females and 70 males so I attributed these differences to small sample size of the original dataset.</span>
+<span id="cb8-299"><a href="#cb8-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-300"><a href="#cb8-300" aria-hidden="true" tabindex="-1"></a><span class="fu">#### CGPA</span></span>
+<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| column: screen-inset</span></span>
+<span id="cb8-305"><a href="#cb8-305" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-306"><a href="#cb8-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-307"><a href="#cb8-307" aria-hidden="true" tabindex="-1"></a>get_box_plot(<span class="st">"cgpa"</span>)</span>
+<span id="cb8-308"><a href="#cb8-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-309"><a href="#cb8-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-310"><a href="#cb8-310" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Average Sleep</span></span>
-<span id="cb8-313"><a href="#cb8-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-314"><a href="#cb8-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-315"><a href="#cb8-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-316"><a href="#cb8-316" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"average_sleep"</span>)</span>
-<span id="cb8-317"><a href="#cb8-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-318"><a href="#cb8-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-319"><a href="#cb8-319" aria-hidden="true" tabindex="-1"></a>This section clearly indicates that students who slept more reported lower levels of mental health concerns. This is likely due to the fact that students who sleep less are more likely to have been under greater stress due to a variety of factors such as staying up late to study, and not getting enough sleep.</span>
+<span id="cb8-310"><a href="#cb8-310" aria-hidden="true" tabindex="-1"></a>According to the box plots, the students who reported the highest levels of mental health concern were students with GPA's between 1.5 and 2.0. However, students with the highest GPA's (3.5-4.0) tended to also have high levels of depression, anxiety, and isolation. The later is likely due to the fact that students with higher GPA's are more likely to have be under more stress to maintain their grades at this high level. The former is likely influenced from the stress of passing their classes. Whereas students with medium GPA's (2.5-3.5) overall had very average levels of mental health concerns. </span>
+<span id="cb8-311"><a href="#cb8-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-312"><a href="#cb8-312" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Average Sleep</span></span>
+<span id="cb8-315"><a href="#cb8-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-316"><a href="#cb8-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-317"><a href="#cb8-317" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-318"><a href="#cb8-318" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"average_sleep"</span>)</span>
+<span id="cb8-319"><a href="#cb8-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-320"><a href="#cb8-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-321"><a href="#cb8-321" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Campus Discrimination</span></span>
-<span id="cb8-324"><a href="#cb8-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-325"><a href="#cb8-325" aria-hidden="true" tabindex="-1"></a><span class="co">#| column: screen-inset</span></span>
-<span id="cb8-326"><a href="#cb8-326" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-327"><a href="#cb8-327" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-328"><a href="#cb8-328" aria-hidden="true" tabindex="-1"></a>get_box_plot(<span class="st">"campus_discrimination"</span>)</span>
-<span id="cb8-329"><a href="#cb8-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-330"><a href="#cb8-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-331"><a href="#cb8-331" aria-hidden="true" tabindex="-1"></a>This section is also trivial with those who experienced campus discrimination reporting higher levels of mental health concerns than those who did not. This is likely due to the fact that students who were discriminated against were likely to have been under greater stress due to the discrimination.</span>
+<span id="cb8-321"><a href="#cb8-321" aria-hidden="true" tabindex="-1"></a>This section clearly indicates that students who slept more reported lower levels of mental health concerns. This is likely due to the fact that students who sleep less are more likely to have been under greater stress due to a variety of factors such as staying up late to study, and not getting enough sleep.</span>
+<span id="cb8-322"><a href="#cb8-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-323"><a href="#cb8-323" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Campus Discrimination</span></span>
+<span id="cb8-326"><a href="#cb8-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-327"><a href="#cb8-327" aria-hidden="true" tabindex="-1"></a><span class="co">#| column: screen-inset</span></span>
+<span id="cb8-328"><a href="#cb8-328" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-329"><a href="#cb8-329" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-330"><a href="#cb8-330" aria-hidden="true" tabindex="-1"></a>get_box_plot(<span class="st">"campus_discrimination"</span>)</span>
+<span id="cb8-331"><a href="#cb8-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-332"><a href="#cb8-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-333"><a href="#cb8-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-334"><a href="#cb8-334" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Academic Pressure</span></span>
-<span id="cb8-337"><a href="#cb8-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-338"><a href="#cb8-338" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-339"><a href="#cb8-339" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-340"><a href="#cb8-340" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"academic_pressure"</span>)</span>
-<span id="cb8-341"><a href="#cb8-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-342"><a href="#cb8-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-343"><a href="#cb8-343" aria-hidden="true" tabindex="-1"></a>According to the heatmap, students who reported higher levels of academic pressure similarly reported higher levels of mental health concerns. Most probably due to the fact that this increased level of pressure attributed to higher levels of stress, thus higher levels of mental health concerns.</span>
+<span id="cb8-333"><a href="#cb8-333" aria-hidden="true" tabindex="-1"></a>This section is also trivial with those who experienced campus discrimination reporting higher levels of mental health concerns than those who did not. This is likely due to the fact that students who were discriminated against were likely to have been under greater stress due to the discrimination.</span>
+<span id="cb8-334"><a href="#cb8-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-335"><a href="#cb8-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-336"><a href="#cb8-336" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Academic Pressure</span></span>
+<span id="cb8-339"><a href="#cb8-339" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-340"><a href="#cb8-340" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-341"><a href="#cb8-341" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-342"><a href="#cb8-342" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"academic_pressure"</span>)</span>
+<span id="cb8-343"><a href="#cb8-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-344"><a href="#cb8-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-345"><a href="#cb8-345" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Academic Workload</span></span>
-<span id="cb8-348"><a href="#cb8-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-349"><a href="#cb8-349" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-350"><a href="#cb8-350" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-351"><a href="#cb8-351" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"academic_workload "</span>)</span>
-<span id="cb8-352"><a href="#cb8-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-353"><a href="#cb8-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-354"><a href="#cb8-354" aria-hidden="true" tabindex="-1"></a>This heatmap also indicates that those who reported higher levels of academic workload were more likely to have reported higher levels of mental health concerns. Likely due to increased workload leading to higher levels of stress. However, for levels of isolation, there is little distinction between those who reported academic workloads between 2 and 4. Interestingly enough, those with the highest workload reported the highest levels of future insecurity, which should be the opposite of what we would expect.</span>
+<span id="cb8-345"><a href="#cb8-345" aria-hidden="true" tabindex="-1"></a>According to the heatmap, students who reported higher levels of academic pressure similarly reported higher levels of mental health concerns. Most probably due to the fact that this increased level of pressure attributed to higher levels of stress, thus higher levels of mental health concerns.</span>
+<span id="cb8-346"><a href="#cb8-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-347"><a href="#cb8-347" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Academic Workload</span></span>
+<span id="cb8-350"><a href="#cb8-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-351"><a href="#cb8-351" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-352"><a href="#cb8-352" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-353"><a href="#cb8-353" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"academic_workload "</span>)</span>
+<span id="cb8-354"><a href="#cb8-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-355"><a href="#cb8-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-356"><a href="#cb8-356" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Financial Concerns</span></span>
-<span id="cb8-359"><a href="#cb8-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-360"><a href="#cb8-360" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-361"><a href="#cb8-361" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-362"><a href="#cb8-362" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"financial_concerns"</span>)</span>
-<span id="cb8-363"><a href="#cb8-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-364"><a href="#cb8-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-365"><a href="#cb8-365" aria-hidden="true" tabindex="-1"></a>This heatmap indicates that only students with level 5 financial concerns reported higher levels of mental health concerns. This might suggest that financial concerns are only a major stress factor for students with the highest levels of financial concerns.</span>
+<span id="cb8-356"><a href="#cb8-356" aria-hidden="true" tabindex="-1"></a>This heatmap also indicates that those who reported higher levels of academic workload were more likely to have reported higher levels of mental health concerns. Likely due to increased workload leading to higher levels of stress. However, for levels of isolation, there is little distinction between those who reported academic workloads between 2 and 4. Interestingly enough, those with the highest workload reported the highest levels of future insecurity, which should be the opposite of what we would expect.</span>
+<span id="cb8-357"><a href="#cb8-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-358"><a href="#cb8-358" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Financial Concerns</span></span>
+<span id="cb8-361"><a href="#cb8-361" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-362"><a href="#cb8-362" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-363"><a href="#cb8-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-364"><a href="#cb8-364" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"financial_concerns"</span>)</span>
+<span id="cb8-365"><a href="#cb8-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-366"><a href="#cb8-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-367"><a href="#cb8-367" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Social Relationships</span></span>
-<span id="cb8-370"><a href="#cb8-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-371"><a href="#cb8-371" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-372"><a href="#cb8-372" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-373"><a href="#cb8-373" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"social_relationships"</span>)</span>
-<span id="cb8-374"><a href="#cb8-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-375"><a href="#cb8-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-376"><a href="#cb8-376" aria-hidden="true" tabindex="-1"></a>The heatmap clearly indicated that those with poorer social relationships reported higher levels of mental health concerns. This might suggest that social relationships are highly beneficial for mental health. There is however a slight increase in mental health concerns for those with the highest levels of social relationships, which I attribute to uneven sample size of the original dataset as there were only 6 students that reported the highest level of social relationships.</span>
+<span id="cb8-367"><a href="#cb8-367" aria-hidden="true" tabindex="-1"></a>This heatmap indicates that only students with level 5 financial concerns reported higher levels of mental health concerns. This might suggest that financial concerns are only a major stress factor for students with the highest levels of financial concerns.</span>
+<span id="cb8-368"><a href="#cb8-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-369"><a href="#cb8-369" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Social Relationships</span></span>
+<span id="cb8-372"><a href="#cb8-372" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-373"><a href="#cb8-373" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-374"><a href="#cb8-374" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-375"><a href="#cb8-375" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"social_relationships"</span>)</span>
+<span id="cb8-376"><a href="#cb8-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-377"><a href="#cb8-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-378"><a href="#cb8-378" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Sports Engagement</span></span>
-<span id="cb8-381"><a href="#cb8-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-382"><a href="#cb8-382" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
-<span id="cb8-383"><a href="#cb8-383" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb8-384"><a href="#cb8-384" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"sports_engagement"</span>)</span>
-<span id="cb8-385"><a href="#cb8-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-386"><a href="#cb8-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-387"><a href="#cb8-387" aria-hidden="true" tabindex="-1"></a>This heatmap indicates that students that participate in sports 4-6 times a month had the lowest levels of mental health concerns. This might suggest that sports engagement is a positive factor for mental health. However, those who reported 7 or more times of sports engagement had some of the highest levels of mental health concerns. These people might be student athletes who are required to put a lot of time and effort into their sport, thus leading to higher levels of stress. In general, students with no sports participations reported the highest levels of mental health concerns. This might suggest that while sports engagement is a positive factor for mental health, it can also become a stress factor after a certain point.</span>
+<span id="cb8-378"><a href="#cb8-378" aria-hidden="true" tabindex="-1"></a>The heatmap clearly indicated that those with poorer social relationships reported higher levels of mental health concerns. This might suggest that social relationships are highly beneficial for mental health. There is however a slight increase in mental health concerns for those with the highest levels of social relationships, which I attribute to uneven sample size of the original dataset as there were only 6 students that reported the highest level of social relationships.</span>
+<span id="cb8-379"><a href="#cb8-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-380"><a href="#cb8-380" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Sports Engagement</span></span>
+<span id="cb8-383"><a href="#cb8-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-384"><a href="#cb8-384" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 1</span></span>
+<span id="cb8-385"><a href="#cb8-385" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-386"><a href="#cb8-386" aria-hidden="true" tabindex="-1"></a>get_heatmap(<span class="st">"sports_engagement"</span>)</span>
+<span id="cb8-387"><a href="#cb8-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-388"><a href="#cb8-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-389"><a href="#cb8-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-390"><a href="#cb8-390" aria-hidden="true" tabindex="-1"></a><span class="fu">## Insights</span></span>
-<span id="cb8-391"><a href="#cb8-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### Impacts</span></span>
-<span id="cb8-392"><a href="#cb8-392" aria-hidden="true" tabindex="-1"></a>First of all, the tool is able to correctly identify students who are at risk of mental health issues. This tool can be used to help identify students who are at risk of mental health issues and provide them with the resources they need. This tool can easily differentiate between low risk and high risk students which is quite useful. </span>
-<span id="cb8-393"><a href="#cb8-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-394"><a href="#cb8-394" aria-hidden="true" tabindex="-1"></a>An interesting insight that can be derived from the exploratory data analysis is a stronger presence of catastrophizing in the high risk group. Catastrophizing is a cognitive distortion where people overly despair without an objective reason to (Psychology Today). In the heatmap found in the <span class="co">[</span><span class="ot">Academic Workload</span><span class="co">](#academic-workload)</span> section, it shows that students who are doing the most work reported the highest levels of future insecurity. This is counter intuitive because if one is doing more work, then this should reflect in the workplace and should be more secure in the future. However we find this is not the case in this group.</span>
+<span id="cb8-389"><a href="#cb8-389" aria-hidden="true" tabindex="-1"></a>This heatmap indicates that students that participate in sports 4-6 times a month had the lowest levels of mental health concerns. This might suggest that sports engagement is a positive factor for mental health. However, those who reported 7 or more times of sports engagement had some of the highest levels of mental health concerns. These people might be student athletes who are required to put a lot of time and effort into their sport, thus leading to higher levels of stress. In general, students with no sports participations reported the highest levels of mental health concerns. This might suggest that while sports engagement is a positive factor for mental health, it can also become a stress factor after a certain point.</span>
+<span id="cb8-390"><a href="#cb8-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-391"><a href="#cb8-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-392"><a href="#cb8-392" aria-hidden="true" tabindex="-1"></a><span class="fu">## Insights</span></span>
+<span id="cb8-393"><a href="#cb8-393" aria-hidden="true" tabindex="-1"></a><span class="fu">### Impacts</span></span>
+<span id="cb8-394"><a href="#cb8-394" aria-hidden="true" tabindex="-1"></a>First of all, the tool is able to correctly identify students who are at risk of mental health issues. This tool can be used to help identify students who are at risk of mental health issues and provide them with the resources they need. This tool can easily differentiate between low risk and high risk students which is quite useful. </span>
 <span id="cb8-395"><a href="#cb8-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-396"><a href="#cb8-396" aria-hidden="true" tabindex="-1"></a>Similarly, students with the highest <span class="co">[</span><span class="ot">CGPA</span><span class="co">](#cgpa)</span> reported the second highest levels of mental health concerns (second to students with CGPA's between 1.5-2.0). In general, students with the highest GPA's should be feel more secure, however, the increased mental health concerns probably stem from increased stress to maintain a high CGPA. Take for example, a student with a 4.0 and a 3.4 GPA. The student with the 4.0 will likely be more stressed than the student with the 3.4 because a single "B" on their transcript would messup their 4.0 GPA. This might explain why students with the highest CGPA reported the second highest levels of mental health concerns.</span>
+<span id="cb8-396"><a href="#cb8-396" aria-hidden="true" tabindex="-1"></a>An interesting insight that can be derived from the exploratory data analysis is a stronger presence of catastrophizing in the high risk group. Catastrophizing is a cognitive distortion where people overly despair without an objective reason to (Psychology Today). In the heatmap found in the <span class="co">[</span><span class="ot">Academic Workload</span><span class="co">](#academic-workload)</span> section, it shows that students who are doing the most work reported the highest levels of future insecurity. This is counter intuitive because if one is doing more work, then this should reflect in the workplace and should be more secure in the future. However we find this is not the case in this group.</span>
 <span id="cb8-397"><a href="#cb8-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-398"><a href="#cb8-398" aria-hidden="true" tabindex="-1"></a>Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one's perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.</span>
+<span id="cb8-398"><a href="#cb8-398" aria-hidden="true" tabindex="-1"></a>Similarly, students with the highest <span class="co">[</span><span class="ot">CGPA</span><span class="co">](#cgpa)</span> reported the second highest levels of mental health concerns (second to students with CGPA's between 1.5-2.0). In general, students with the highest GPA's should be feel more secure, however, the increased mental health concerns probably stem from increased stress to maintain a high CGPA. Take for example, a student with a 4.0 and a 3.4 GPA. The student with the 4.0 will likely be more stressed than the student with the 3.4 because a single "B" on their transcript would messup their 4.0 GPA. This might explain why students with the highest CGPA reported the second highest levels of mental health concerns.</span>
 <span id="cb8-399"><a href="#cb8-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-400"><a href="#cb8-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-401"><a href="#cb8-401" aria-hidden="true" tabindex="-1"></a><span class="fu">### Problems</span></span>
-<span id="cb8-402"><a href="#cb8-402" aria-hidden="true" tabindex="-1"></a>One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.</span>
+<span id="cb8-400"><a href="#cb8-400" aria-hidden="true" tabindex="-1"></a>Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one's perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.</span>
+<span id="cb8-401"><a href="#cb8-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-402"><a href="#cb8-402" aria-hidden="true" tabindex="-1"></a>According to the <span class="co">[</span><span class="ot">Linear Regression</span><span class="co">](#linear-regression-coefficients)</span>, the three biggest pressures for students with depression is academic workload, academic pressure, and financial concerns. For anxiety, the biggest pressures are academic workload, academic pressure, and social relationships. For isolations, the biggest pressures are social relationships, academic pressure, and study satisfaction. Lastly for future insecurity, the biggest pressures are study satisfaction, campus discrimination, and academic workload. Overall, this shows that students with high levels of academic workload and pressure are more likely to have depression, anxiety, isolation, and future insecurity. </span>
 <span id="cb8-403"><a href="#cb8-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-404"><a href="#cb8-404" aria-hidden="true" tabindex="-1"></a>Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more "normal" and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed. </span>
+<span id="cb8-404"><a href="#cb8-404" aria-hidden="true" tabindex="-1"></a>The data shows that there is a correlation between study satisfaction and isolation and future insecurity. This probably is from those that are unsatisfied with their studies probably feel the need to study more, leading to isolation. The need to study more also probably worries them about their capabilities in the future so they are more insecure about their future. </span>
 <span id="cb8-405"><a href="#cb8-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-406"><a href="#cb8-406" aria-hidden="true" tabindex="-1"></a>Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.</span>
-<span id="cb8-407"><a href="#cb8-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-408"><a href="#cb8-408" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
-<span id="cb8-409"><a href="#cb8-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-410"><a href="#cb8-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
-<span id="cb8-411"><a href="#cb8-411" aria-hidden="true" tabindex="-1"></a>McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.</span>
+<span id="cb8-406"><a href="#cb8-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### Problems</span></span>
+<span id="cb8-407"><a href="#cb8-407" aria-hidden="true" tabindex="-1"></a>One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.</span>
+<span id="cb8-408"><a href="#cb8-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-409"><a href="#cb8-409" aria-hidden="true" tabindex="-1"></a>Another massive flaw in this project is the social desirability bias. Simply this means that a person will answer the survey in a way to make them appear more "normal" and avoid any potential consequences of seeming undesirable. What this would look like in this survey is a person reporting that they sleep 8 hours a night and have a social life that they consider normal, but in reality, they have a poor sleep schedule and social life. This would lead to this person going unnoticed and not receiving the help they needed. </span>
+<span id="cb8-410"><a href="#cb8-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-411"><a href="#cb8-411" aria-hidden="true" tabindex="-1"></a>Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.</span>
 <span id="cb8-412"><a href="#cb8-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-413"><a href="#cb8-413" aria-hidden="true" tabindex="-1"></a>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</span>
+<span id="cb8-413"><a href="#cb8-413" aria-hidden="true" tabindex="-1"></a>In general, the issue comes with the fact that because doctor visits and the purpose of this tool require patients to fill out this survey in a way that links the results directly to them, they are more likely to lie to appear normal (social desirability bias) as opposed to an anonymous survey where they are less likely to lie.</span>
 <span id="cb8-414"><a href="#cb8-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-415"><a href="#cb8-415" aria-hidden="true" tabindex="-1"></a>Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol. 13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</span>
+<span id="cb8-415"><a href="#cb8-415" aria-hidden="true" tabindex="-1"></a>Overall, it is questionable if this tool would be useful in the real world as what the tool does well are already easily done by doctors. However, that isn't to say that with more data there is more room for fine tunning within the models to make this tool more accurate and stronger than current doctors.</span>
 <span id="cb8-416"><a href="#cb8-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-417"><a href="#cb8-417" aria-hidden="true" tabindex="-1"></a>“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.</span>
-<span id="cb8-418"><a href="#cb8-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-419"><a href="#cb8-419" aria-hidden="true" tabindex="-1"></a>Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</span>
+<span id="cb8-417"><a href="#cb8-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-418"><a href="#cb8-418" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb8-419"><a href="#cb8-419" aria-hidden="true" tabindex="-1"></a>McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.</span>
 <span id="cb8-420"><a href="#cb8-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-421"><a href="#cb8-421" aria-hidden="true" tabindex="-1"></a>PYTHON. “Python.” Python.org, Python.org, www.python.org/.</span>
+<span id="cb8-421"><a href="#cb8-421" aria-hidden="true" tabindex="-1"></a>“Consequences of Student Mental Health Issues – Suicide Prevention Resource Center.” Sprc.org, 2015, sprc.org/consequences-of-student-mental-health-issues/.</span>
 <span id="cb8-422"><a href="#cb8-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-423"><a href="#cb8-423" aria-hidden="true" tabindex="-1"></a>“Python Data Analysis Library.” Pydata.org, 2018, pandas.pydata.org/.</span>
+<span id="cb8-423"><a href="#cb8-423" aria-hidden="true" tabindex="-1"></a>Barbayannis, Georgia, et al. “Academic Stress and Mental Well-Being in College Students: Correlations, Affected Groups, and COVID-19.” Frontiers in Psychology, vol. 13, no. 886344, 23 May 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9169886/, https://doi.org/10.3389/fpsyg.2022.886344.</span>
 <span id="cb8-424"><a href="#cb8-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-425"><a href="#cb8-425" aria-hidden="true" tabindex="-1"></a>Numpy. “NumPy.” Numpy.org, 2024, numpy.org/.</span>
+<span id="cb8-425"><a href="#cb8-425" aria-hidden="true" tabindex="-1"></a>“New Data Emphasizes the Correlation between Loneliness and Student Mental Health.” Active Minds, www.activeminds.org/press-releases/new-data-emphasizes-correlation-loneliness-student-mental-health/.</span>
 <span id="cb8-426"><a href="#cb8-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-427"><a href="#cb8-427" aria-hidden="true" tabindex="-1"></a>“Seaborn: Statistical Data Visualization — Seaborn 0.11.2 Documentation.” Seaborn.pydata.org, seaborn.pydata.org/#.</span>
+<span id="cb8-427"><a href="#cb8-427" aria-hidden="true" tabindex="-1"></a>Ashfaq, A. (2024). Student Mental Health Survey. Kaggle.com. https://www.kaggle.com/datasets/abdullahashfaqvirk/student-mental-health-survey</span>
 <span id="cb8-428"><a href="#cb8-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-429"><a href="#cb8-429" aria-hidden="true" tabindex="-1"></a>Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.3 Documentation.” Scikit-Learn.org, 2019, scikit-learn.org/stable/index.html.</span>
+<span id="cb8-429"><a href="#cb8-429" aria-hidden="true" tabindex="-1"></a>PYTHON. “Python.” Python.org, Python.org, www.python.org/.</span>
 <span id="cb8-430"><a href="#cb8-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-431"><a href="#cb8-431" aria-hidden="true" tabindex="-1"></a>“Quarto.” Quarto.org, quarto.org/.</span>
+<span id="cb8-431"><a href="#cb8-431" aria-hidden="true" tabindex="-1"></a>“Python Data Analysis Library.” Pydata.org, 2018, pandas.pydata.org/.</span>
 <span id="cb8-432"><a href="#cb8-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-433"><a href="#cb8-433" aria-hidden="true" tabindex="-1"></a>Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol. 9, no. 1, 4 May 2016, pp. 211–217, https://doi.org/10.2147%2FJMDH.S104807.</span>
+<span id="cb8-433"><a href="#cb8-433" aria-hidden="true" tabindex="-1"></a>Numpy. “NumPy.” Numpy.org, 2024, numpy.org/.</span>
 <span id="cb8-434"><a href="#cb8-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-435"><a href="#cb8-435" aria-hidden="true" tabindex="-1"></a>“Catastrophizing | Psychology Today.” Www.psychologytoday.com, www.psychologytoday.com/us/basics/catastrophizing.</span>
+<span id="cb8-435"><a href="#cb8-435" aria-hidden="true" tabindex="-1"></a>“Seaborn: Statistical Data Visualization — Seaborn 0.11.2 Documentation.” Seaborn.pydata.org, seaborn.pydata.org/#.</span>
+<span id="cb8-436"><a href="#cb8-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-437"><a href="#cb8-437" aria-hidden="true" tabindex="-1"></a>Scikit-learn. “Scikit-Learn: Machine Learning in Python — Scikit-Learn 0.20.3 Documentation.” Scikit-Learn.org, 2019, scikit-learn.org/stable/index.html.</span>
+<span id="cb8-438"><a href="#cb8-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-439"><a href="#cb8-439" aria-hidden="true" tabindex="-1"></a>“Quarto.” Quarto.org, quarto.org/.</span>
+<span id="cb8-440"><a href="#cb8-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-441"><a href="#cb8-441" aria-hidden="true" tabindex="-1"></a>Althubaiti, Alaa. “Information Bias in Health Research: Definition, Pitfalls, and Adjustment Methods.” Journal of Multidisciplinary Healthcare, vol. 9, no. 1, 4 May 2016, pp. 211–217, https://doi.org/10.2147%2FJMDH.S104807.</span>
+<span id="cb8-442"><a href="#cb8-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-443"><a href="#cb8-443" aria-hidden="true" tabindex="-1"></a>“Catastrophizing | Psychology Today.” Www.psychologytoday.com, www.psychologytoday.com/us/basics/catastrophizing.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

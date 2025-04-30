@@ -24,6 +24,8 @@ The idea behind this project was to pay special attention to the mental health o
 
 In my initial planing stages of this tool was to figure out a way to standardize the user input (for example, a level 1 academic workload would be less than 3 hours of work a week outside of class). Ultimately I ended up scraping the idea because the tool is meant to act as a guage for how students feel and to better understand their perspective not to objectify their situation. For example, 2 students could be in the same classes, have the same amount of workload but student A finds it more stressful than student B. The survey would most likely reflect this by student A indicating a higher academic workload than studet B. As such, standradizing the survey would actually make thse two students appear the same when in reality it should attempt to identify student A as higher risk because they feel more stressed from courses. As such, the focus should be on measuring the percieved pressure and predicting the risk of mental health disorders. This kind of bias is called the self report bias where peaople misreport themselves in the survey data. This is a problem across all surveys however my tool hopes to leverage this bias in order to better understand the mental health of students.
 
+Overall, this tool aims to better understand student mental health and identify which pressures most contribute to student mental health outcomes.
+
 ## Methodology
 The primary methodology for this tool is to act as a predictor for mental health disorders. As such, the tool will take user input and predict the risk of depression, anxiety, and isolation in students. This tool will use a linear regression model to predict the risk of mental health disorders. Specifically, the tool will use multiple linear regressions to evaluate each of the mental health concerns in the survey (Depression, Anxiety, Isolation, Future Insecurity). The tool only used certain columns from the survey. The columns used were:
 
@@ -370,6 +372,9 @@ Similarly, students with the highest [CGPA](#cgpa) reported the second highest l
 
 Overall, Catastrophizing is very present in members of this data set as many students who should feel quite secure reported high levels of mental health concerns. Now unfortunately the tool does not have the ability to correct for this, however a survey like this could be used to identify students who are potentially catastrophizing and provide them with the resources they need. Professor Turner mentioned that this is a problem that can be addressed through positive psychology, which helps minimize the negative effects of catastrophizing by helping people learn how to shift their perspective of their reality. Positive psychology focuses on shifting one's perspective of their situation rather than fix the situation itself. For example, in this situation those with the highest academic workloads feel stressed and insecure and that is why they are constantly doing so much academically. Positive psychology would have these students understand that because they are doing a lot that they should feel more secure with their future lives, rather than try to relieve stress by having them take more or less work. This would help prevent those students from catastrophizing in the future.
 
+According to the [Linear Regression](#linear-regression-coefficients), the three biggest pressures for students with depression is academic workload, academic pressure, and financial concerns. For anxiety, the biggest pressures are academic workload, academic pressure, and social relationships. For isolations, the biggest pressures are social relationships, academic pressure, and study satisfaction. Lastly for future insecurity, the biggest pressures are study satisfaction, campus discrimination, and academic workload. Overall, this shows that students with high levels of academic workload and pressure are more likely to have depression, anxiety, isolation, and future insecurity. 
+
+The data shows that there is a correlation between study satisfaction and isolation and future insecurity. This probably is from those that are unsatisfied with their studies probably feel the need to study more, leading to isolation. The need to study more also probably worries them about their capabilities in the future so they are more insecure about their future. 
 
 ### Problems
 One of the biggest problems with this project is that overall the data set is quite small and not very diverse. In total the dataset included 87 participants with an overall skewed distribution for many different variables. This made it very difficult to draw accurate conclusions from the data.
@@ -378,7 +383,10 @@ Another massive flaw in this project is the social desirability bias. Simply thi
 
 Due to the biases mentioned above the tool has trouble identifying students who are at risk of mental health issues and choose to hide this info. This is true in the real world with doctors who are not able to identify students who are lying to be percieved as normal. Thus, the actual benefits of this tool are limited because doctors can already identify students who are at high risk of mental health issues. The main issues lie in students who are at medium risk and students that lie to be percieved as normal.
 
-## Conclusion
+In general, the issue comes with the fact that because doctor visits and the purpose of this tool require patients to fill out this survey in a way that links the results directly to them, they are more likely to lie to appear normal (social desirability bias) as opposed to an anonymous survey where they are less likely to lie.
+
+Overall, it is questionable if this tool would be useful in the real world as what the tool does well are already easily done by doctors. However, that isn't to say that with more data there is more room for fine tunning within the models to make this tool more accurate and stronger than current doctors.
+
 
 ## References
 McAlpine, Kat. “Depression, Anxiety, Loneliness Are Peaking in College Students.” Boston University, 17 Feb. 2021, www.bu.edu/articles/2021/depression-anxiety-loneliness-are-peaking-in-college-students/.
